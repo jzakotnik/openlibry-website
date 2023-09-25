@@ -73,7 +73,7 @@
                         <ul class="flex grow flex-wrap items-center font-medium">
                             <li>
                                 <a class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 px-5 py-2 flex items-center transition duration-150 ease-in-out"
-                                    href="#">Was es kann</a>
+                                    href="#overview_section">Was es kann</a>
                             </li>
                             <li>
                                 <a class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 px-5 py-2 flex items-center transition duration-150 ease-in-out"
@@ -81,7 +81,7 @@
                             </li>
                             <li>
                                 <a class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 px-5 py-2 flex items-center transition duration-150 ease-in-out"
-                                    href="#">Referenzen</a>
+                                    href="#references_section">Referenzen</a>
                             </li>
                             <!-- 1st level: hover -->
                             <li class="relative" x-data="{ open: false }" @mouseenter="open = true"
@@ -219,11 +219,11 @@
                                 <ul>
                                     <li>
                                         <a class="flex text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 py-2"
-                                            href="#">Was es kann</a>
+                                            href="#overview_section">Was es kann</a>
                                     </li>
                                     <li>
                                         <a class="flex text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 py-2"
-                                            href="#">Installation</a>
+                                            href="https://github.com/jzakotnik/openlibry#installation-und-konfiguration">Installation</a>
                                     </li>
                                     <li>
                                         <a class="flex text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 py-2"
@@ -550,9 +550,10 @@
 
                         <!-- Section header -->
                         <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+                            <a id="overview_section">
                             <h2 class="h2 font-red-hat-display mb-4">Leihe, Bücher, Nutzer und Reports</h2>
                             <p class="text-xl text-gray-600 dark:text-gray-400">Alle Aufgaben können in 4 Screens
-                                erledigt werden. Ohne Schnickschnack.</p>
+                                erledigt werden. Ohne Schnickschnack.</p></a>
                         </div>
 
                         <!-- Section content -->
@@ -801,7 +802,7 @@
                         <!-- Testimonials -->
                         <div
                             class="max-w-sm mx-auto grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:gap-12 items-start sm:max-w-none md:max-w-2xl lg:max-w-none">
-
+                            
                             <!-- 1st testimonial -->
                             <div class="text-center">
                                 <div class="relative inline-flex flex-col mb-4">
@@ -813,9 +814,9 @@
                                             d="M2.785 5.334C2.538 5.5-.2 2.944.011 2.646.826 1.483 2.183.836 3.62.5 5.064.158 6.582.117 7.92-.02c.017-.002.098.153.088.166-1.763 2.018-3.223 3.836-5.221 5.188zm3.676 6.519c-.862.184-1.937-3.403-1.07-3.711 3.422-1.22 7.078-1.671 10.728-1.766 3.655-.096 7.304.162 10.866.32.044.002.06.177.018.187-6.938 1.634-13.691 3.504-20.542 4.97z" />
                                     </svg>
                                 </div>
-                                <blockquote class="text-xl text-gray-600 dark:text-gray-400">“ Unsere alte
+                                <blockquote class="text-xl text-gray-600 dark:text-gray-400"><a id="references_section">“ Unsere alte
                                     Bibliothekssoftware wurde seit Jahren nicht gepflegt - endlich gibt es eine
-                                    Alternative! “</blockquote>
+                                    Alternative! “</blockquote></a>
                                 <div class="font-red-hat-display font-bold mt-2">
                                     <cite class="not-italic">—Annette G.</cite>
                                 </div>
