@@ -133,3 +133,4 @@ dist
 .pnp.*
 images/.DS_Store
 videos/.DS_Store
+.DS_Store

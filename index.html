@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="de" class="">
 
 <head>
 
@@ -46,7 +46,7 @@
                     <!-- Site branding -->
                     <div class="shrink-0 mr-5">
                         <!-- Logo -->
-                        <a class="block" href="index.html" aria-label="Cruip">
+                        <a class="block" href="index.html" aria-label="OpenLibry">
                             <svg class="w-8 h-8" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
                                     <linearGradient x1="26%" y1="100%" x2="100%" y2="100%" id="logo_a">
@@ -77,7 +77,7 @@
                             </li>
                             <li>
                                 <a class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 px-5 py-2 flex items-center transition duration-150 ease-in-out"
-                                    href="#">Installation</a>
+                                    href="#installation_section">Installation</a>
                             </li>
                             <li>
                                 <a class="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 px-5 py-2 flex items-center transition duration-150 ease-in-out"
@@ -369,46 +369,22 @@
                             <div class="swiper-slide max-w-lg">
                                 <img class="transition-opacity duration-300" src="./images/caroussel_screen_1.jpg"
                                     width="540" height="460" alt="Carousel item 01" />
-                                <div
-                                    class="absolute inset-0 flex flex-col transition-opacity duration-300 translate-z-0">
-
-
-                                </div>
                             </div>
                             <div class="swiper-slide max-w-lg">
                                 <img class="transition-opacity duration-300" src="./images/caroussel_screen_2.jpg"
                                     width="540" height="460" alt="Carousel item 02" />
-                                <div
-                                    class="absolute inset-0 flex flex-col transition-opacity duration-300 translate-z-0">
-
-                                </div>
                             </div>
                             <div class="swiper-slide max-w-lg">
                                 <img class="transition-opacity duration-300" src="./images/caroussel_screen_3.jpg"
                                     width="540" height="460" alt="Carousel item 03" />
-                                <div
-                                    class="absolute inset-0 flex flex-col transition-opacity duration-300 translate-z-0">
-
-
-                                </div>
                             </div>
                             <div class="swiper-slide max-w-lg">
                                 <img class="transition-opacity duration-300" src="./images/caroussel_screen_4.jpg"
                                     width="540" height="460" alt="Carousel item 04" />
-                                <div
-                                    class="absolute inset-0 flex flex-col transition-opacity duration-300 translate-z-0">
-
-
-                                </div>
                             </div>
                             <div class="swiper-slide max-w-lg">
                                 <img class="transition-opacity duration-300" src="./images/caroussel_screen_5.jpg"
                                     width="540" height="460" alt="Carousel item 05" />
-                                <div
-                                    class="absolute inset-0 flex flex-col transition-opacity duration-300 translate-z-0">
-
-
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -438,7 +414,7 @@
                 </div>
             </section>
 
-            <!-- Tabs -->
+            <!-- Feature Videos Section - Improved Layout -->
             <section class="relative border-t border-transparent dark:border-gray-800">
                 <!-- Background gradient -->
                 <div class="absolute inset-0 h-128 dark:opacity-25 bg-gradient-to-b from-gray-100 to-white dark:from-gray-800 dark:to-gray-900 pointer-events-none"
@@ -450,248 +426,138 @@
                         <!-- Section header -->
                         <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
                             <a id="overview_section">
-                            <h2 class="h2 font-red-hat-display mb-4">Leihe, Bücher, Nutzer und Reports</h2>
-                            <p class="text-xl text-gray-600 dark:text-gray-400">Alle Aufgaben können in 4 Screens
-                                erledigt werden. Ohne Schnickschnack.</p></a>
+                            <h2 class="h2 font-red-hat-display mb-4">Alle Funktionen im Überblick</h2>
+                            <p class="text-xl text-gray-600 dark:text-gray-400">Leihe, Bücher, Nutzer und Reports - alle Aufgaben in wenigen Klicks. Sehen Sie, wie einfach die Verwaltung Ihrer Bücherei sein kann.</p></a>
                         </div>
 
-                        <!-- Section content -->
-                        <div x-data="{ category: '1' }">
-                            <div class="grid lg:grid-cols-3 gap-12 lg:gap-6">
-
-                                <!-- Category buttons -->
-                                <div
-                                    class="lg:col-span-1 lg:pr-16 flex flex-wrap justify-center lg:flex-col lg:justify-start -m-1 lg:mx-0">
-                                    <button
-                                        class="lg:w-full font-medium px-3 py-2 bg-white hover:bg-gray-50 shadow dark:bg-gray-800 dark:hover:bg-gray-700 transition duration-150 ease-in-out rounded flex items-center justify-center lg:justify-start m-1 lg:mx-0"
-                                        :class="{ 'bg-teal-500 hover:bg-teal-500 dark:bg-teal-600 dark:hover:bg-teal-600 dark:bg-opacity-25 dark:hover:bg-opacity-25': category === '1' }"
-                                        @click="category = '1'">
-                                        <svg class="w-4 h-4 shrink-0 mr-2" viewBox="0 0 16 16"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path class="fill-current"
-                                                :class="category === '1' ? 'text-teal-200 dark:text-teal-400' : 'text-teal-500 dark:text-gray-400'"
-                                                d="M5 16H4a4 4 0 01-4-4v-1h2v1a2 2 0 002 2h1v2zM13 10h-1.686l-1.207-1.207L14.37 4.63a2.121 2.121 0 00-3-3L7.207 5.793 5.99 4.576 5.98 3.02 3.038.079 0 3.117 3 6h1.586l1.207 1.207L4 9l3 3 1.793-1.793L10 11.414V13l3.01 3.01 2.98-2.979L13 10z" />
-                                        </svg>
-                                        <span
-                                            :class="category === '1' ? 'text-white dark:text-teal-400' : 'text-gray-600 dark:text-gray-300'">Start</span>
-
-                                    </button>
-                                    <button
-                                        class="lg:w-full font-medium px-3 py-2 bg-white hover:bg-gray-50 shadow dark:bg-gray-800 dark:hover:bg-gray-700 transition duration-150 ease-in-out rounded flex items-center justify-center lg:justify-start m-1 lg:mx-0"
-                                        :class="{ 'bg-teal-500 hover:bg-teal-500 dark:bg-teal-600 dark:hover:bg-teal-600 dark:bg-opacity-25 dark:hover:bg-opacity-25': category === '2' }"
-                                        @click="category = '2'">
-                                        <svg class="w-4 h-4 shrink-0 mr-2" viewBox="0 0 16 16"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path class="fill-current"
-                                                :class="category === '2' ? 'text-teal-200 dark:text-teal-400' : 'text-teal-500 dark:text-gray-400'"
-                                                d="M8 3l4 4H4zM8 13L4 9h8zM1 0h14v2H1zM1 14h14v2H1z" />
-                                        </svg>
-                                        <span
-                                            :class="category === '2' ? 'text-white dark:text-teal-400' : 'text-gray-600 dark:text-gray-300'">Bücherverwaltung</span>
-                                    </button>
-                                    <button
-                                        class="lg:w-full font-medium px-3 py-2 bg-white hover:bg-gray-50 shadow dark:bg-gray-800 dark:hover:bg-gray-700 transition duration-150 ease-in-out rounded flex items-center justify-center lg:justify-start m-1 lg:mx-0"
-                                        :class="{ 'bg-teal-500 hover:bg-teal-500 dark:bg-teal-600 dark:hover:bg-teal-600 dark:bg-opacity-25 dark:hover:bg-opacity-25': category === '3' }"
-                                        @click="category = '3'">
-                                        <svg class="w-4 h-4 shrink-0 mr-2" viewBox="0 0 16 16"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path class="fill-current"
-                                                :class="category === '3' ? 'text-teal-200 dark:text-teal-400' : 'text-teal-500 dark:text-gray-400'"
-                                                d="M6 0H1a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V1a1 1 0 00-1-1zM5 5H2V2h3v3zM15 9h-5a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1zm-1 5h-3v-3h3v3zM6 9H1a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1zm-1 5H2v-3h3v3zM12.5 7a1 1 0 01-.707-.293l-2.5-2.5a1 1 0 010-1.414l2.5-2.5a1 1 0 011.414 0l2.5 2.5a1 1 0 010 1.414l-2.5 2.5A1 1 0 0112.5 7z" />
-                                        </svg>
-                                        <span
-                                            :class="category === '3' ? 'text-white dark:text-teal-400' : 'text-gray-600 dark:text-gray-300'">Nutzerverwaltung</span>
-                                    </button>
-                                    <button
-                                        class="lg:w-full font-medium px-3 py-2 bg-white hover:bg-gray-50 shadow dark:bg-gray-800 dark:hover:bg-gray-700 transition duration-150 ease-in-out rounded flex items-center justify-center lg:justify-start m-1 lg:mx-0"
-                                        :class="{ 'bg-teal-500 hover:bg-teal-500 dark:bg-teal-600 dark:hover:bg-teal-600 dark:bg-opacity-25 dark:hover:bg-opacity-25': category === '4' }"
-                                        @click="category = '4'">
-                                        <svg class="w-4 h-4 shrink-0 mr-2" viewBox="0 0 16 16"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path class="fill-current"
-                                                :class="category === '4' ? 'text-teal-200 dark:text-teal-400' : 'text-teal-500 dark:text-gray-400'"
-                                                d="M15.4.6c-.84-.8-2.16-.8-3 0L8.7 4.3c.73.252 1.388.68 1.916 1.244.469.515.83 1.119 1.065 1.775L15.4 3.6c.8-.84.8-2.16 0-3zM4.937 6.9c-1.2 1.2-1.4 5.7-1.4 5.7s4.4-.4 5.6-1.5a2.987 2.987 0 000-4.2 2.9 2.9 0 00-4.2 0z" />
-                                        </svg>
-                                        <span
-                                            :class="category === '4' ? 'text-white dark:text-teal-400' : 'text-gray-600 dark:text-gray-300'">Leihe</span>
-                                    </button>
-                                    <button
-                                        class="lg:w-full font-medium px-3 py-2 bg-white hover:bg-gray-50 shadow dark:bg-gray-800 dark:hover:bg-gray-700 transition duration-150 ease-in-out rounded flex items-center justify-center lg:justify-start m-1 lg:mx-0"
-                                        :class="{ 'bg-teal-500 hover:bg-teal-500 dark:bg-teal-600 dark:hover:bg-teal-600 dark:bg-opacity-25 dark:hover:bg-opacity-25': category === '5' }"
-                                        @click="category = '5'">
-                                        <svg class="w-4 h-4 shrink-0 mr-2" viewBox="0 0 16 16"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path class="fill-current"
-                                                :class="category === '5' ? 'text-teal-200 dark:text-teal-400' : 'text-teal-500 dark:text-gray-400'"
-                                                d="M11 16v-5h5V0H5v5H0v11h11zM2 7h7v7H2V7z" />
-                                        </svg>
-                                        <span
-                                            :class="category === '5' ? 'text-white dark:text-teal-400' : 'text-gray-600 dark:text-gray-300'">Reports</span>
-                                    </button>
+                        <!-- Video Grid - Improved with better spacing and visual hierarchy -->
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10" data-aos-id-videos>
+                            
+                            <!-- Video 1: Start -->
+                            <article class="flex flex-col bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden transition-all duration-300 hover:shadow-3xl hover:scale-105" data-aos="fade-up" data-aos-anchor="[data-aos-id-videos]">
+                                <div class="relative">
+                                    <video class="w-full" width="352" height="264" loop controls preload="metadata">
+                                        <source src="./videos/startscreen_video.mov" type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
                                 </div>
-
-                                <!-- Videos -->
-
-                                <div class="lg:col-span-2 max-w-sm mx-auto md:max-w-3xl lg:max-w-none">
-                                    <div class="grid md:grid-cols-2 gap-6">
-                                        <div x-show="['1'].includes(category)">
-                                            <div class="relative flex justify-center items-center">
-                                                <img class="w-full" src="./images/video-thumb.jpg" width="352"
-                                                    height="264" alt="Video thumbnail 01" />
-                                                <div class="absolute inset-0 flex flex-col">
-                                                    <div class="grow flex justify-center items-center">
-                                                        <a class="hover:opacity-75 transition duration-150 ease-in-out"
-                                                            href="#0">
-                                                            <img src="./images/play-button.svg" width="72" height="72"
-                                                                alt="Play icon" />
-                                                        </a>
-                                                        <video class="absolute w-full h-full" width="1920" height="1080"
-                                                            loop controls>
-                                                            <source src="./videos/startscreen_video.mov"
-                                                                type="video/mp4" />
-                                                            Your browser does not support the video tag.
-                                                        </video>
-                                                    </div>
-                                                    <div
-                                                        class="w-full bottom-0 px-6 py-3 bg-white opacity-90 dark:bg-gray-900 flex justify-between items-center">
-                                                        <a class="text-gray-900 dark:text-gray-400 font-medium"
-                                                            href="#0">Startseite</a>
-                                                        <div
-                                                            class="inline-flex px-3 py-1 text-xs font-medium text-white bg-gray-900 bg-opacity-50 dark:text-teal-400 dark:bg-teal-600 dark:bg-opacity-25 rounded-full">
-                                                            1 Min</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div x-show="['2'].includes(category)">
-                                            <div class="relative flex justify-center items-center">
-                                                <img class="w-full" src="./images/video-thumb.jpg" width="352"
-                                                    height="264" alt="Video thumbnail 01" />
-                                                <div class="absolute inset-0 flex flex-col">
-                                                    <div class="grow flex justify-center items-center">
-                                                        <a class="hover:opacity-75 transition duration-150 ease-in-out"
-                                                            href="#0">
-                                                            <img src="./images/play-button.svg" width="72" height="72"
-                                                                alt="Play icon" />
-                                                        </a>
-                                                        <video class="absolute w-full h-full" width="1920" height="1080"
-                                                            loop controls>
-                                                            <source src="./videos/book_video.mov"
-                                                                type="video/mp4" />
-                                                            Your browser does not support the video tag.
-                                                        </video>
-                                                    </div>
-                                                    <div
-                                                        class="w-full bottom-0 px-6 py-3 bg-white opacity-90 dark:bg-gray-900 flex justify-between items-center">
-                                                        <a class="text-gray-900 dark:text-gray-400 font-medium"
-                                                            href="#0">Bücherverwaltung</a>
-                                                        <div
-                                                            class="inline-flex px-3 py-1 text-xs font-medium text-white bg-gray-900 bg-opacity-50 dark:text-teal-400 dark:bg-teal-600 dark:bg-opacity-25 rounded-full">
-                                                            2 Min</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div x-show="['3'].includes(category)">
-                                            <div class="relative flex justify-center items-center shadow">
-                                                <img class="w-full" src="./images/video-thumb.jpg" width="352"
-                                                    height="264" alt="Video thumbnail 01" />
-                                                <div class="absolute inset-0 flex flex-col">
-                                                    <div class="grow flex justify-center items-center">
-                                                        <a class="hover:opacity-75 transition duration-150 ease-in-out"
-                                                            href="#0">
-                                                            <img src="./images/play-button.svg" width="72" height="72"
-                                                                alt="Play icon" />
-                                                        </a>
-                                                        <video class="absolute w-full h-full" width="1920" height="1080"
-                                                            loop controls>
-                                                            <source src="./videos/user_video.mov"
-                                                                type="video/mp4" />
-                                                            Your browser does not support the video tag.
-                                                        </video>
-                                                    </div>
-                                                    <div
-                                                        class="w-full bottom-0 px-6 py-3 bg-white opacity-90 dark:bg-gray-900 flex justify-between items-center">
-                                                        <a class="text-gray-900 dark:text-gray-400 font-medium"
-                                                            href="#0">Nutzerverwaltung</a>
-                                                        <div
-                                                            class="inline-flex px-3 py-1 text-xs font-medium text-white bg-gray-900 bg-opacity-50 dark:text-teal-400 dark:bg-teal-600 dark:bg-opacity-25 rounded-full">
-                                                            1 Min</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div x-show="['4'].includes(category)">
-                                            <div class="relative flex justify-center items-center shadow">
-                                                <img class="w-full" src="./images/video-thumb.jpg" width="352"
-                                                    height="264" alt="Video thumbnail 01" />
-                                                <div class="absolute inset-0 flex flex-col">
-                                                    <div class="grow flex justify-center items-center">
-                                                        <a class="hover:opacity-75 transition duration-150 ease-in-out"
-                                                            href="#0">
-                                                            <img src="./images/play-button.svg" width="72" height="72"
-                                                                alt="Play icon" />
-                                                        </a>
-                                                        <video class="absolute w-full h-full" width="1920" height="1080"
-                                                            loop controls>
-                                                            <source src="./videos/rent_video.mov"
-                                                                type="video/mp4" />
-                                                            Your browser does not support the video tag.
-                                                        </video>
-                                                    </div>
-                                                    <div
-                                                        class="w-full bottom-0 px-6 py-3 bg-white opacity-90 dark:bg-gray-900 flex justify-between items-center">
-                                                        <a class="text-gray-900 dark:text-gray-400 font-medium"
-                                                            href="#0">Leihe</a>
-                                                        <div
-                                                            class="inline-flex px-3 py-1 text-xs font-medium text-white bg-gray-900 bg-opacity-50 dark:text-teal-400 dark:bg-teal-600 dark:bg-opacity-25 rounded-full">
-                                                            2 Min</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div x-show="['5'].includes(category)">
-                                            <div class="relative flex justify-center items-center shadow">
-                                                <img class="w-full" src="./images/video-thumb.jpg" width="352"
-                                                    height="264" alt="Video thumbnail 01" />
-                                                <div class="absolute inset-0 flex flex-col">
-                                                    <div class="grow flex justify-center items-center">
-                                                        <a class="hover:opacity-75 transition duration-150 ease-in-out"
-                                                            href="#0">
-                                                            <img src="./images/play-button.svg" width="72" height="72"
-                                                                alt="Play icon" />
-                                                        </a>
-                                                        <video class="absolute w-full h-full" width="1920" height="1080"
-                                                            loop controls>
-                                                            <source src="./videos/report_video.mov"
-                                                                type="video/mp4" />
-                                                            Your browser does not support the video tag.
-                                                        </video>
-                                                    </div>
-                                                    <div
-                                                        class="w-full bottom-0 px-6 py-3 bg-white opacity-90 dark:bg-gray-900 flex justify-between items-center">
-                                                        <a class="text-gray-900 dark:text-gray-400 font-medium"
-                                                            href="#0">Reports</a>
-                                                        <div
-                                                            class="inline-flex px-3 py-1 text-xs font-medium text-white bg-gray-900 bg-opacity-50 dark:text-teal-400 dark:bg-teal-600 dark:bg-opacity-25 rounded-full">
-                                                            1 Min</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="p-6 flex-grow flex flex-col">
+                                    <div class="flex items-center mb-3">
+                                        <svg class="w-5 h-5 text-teal-500 mr-2 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                                        </svg>
+                                        <h3 class="text-xl font-bold font-red-hat-display">Startseite</h3>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm">Schneller Überblick über alle wichtigen Informationen und direkter Zugriff auf häufig genutzte Funktionen.</p>
+                                    <div class="mt-auto pt-4">
+                                        <span class="inline-flex px-3 py-1 text-xs font-medium text-teal-600 bg-teal-100 dark:text-teal-400 dark:bg-teal-600 dark:bg-opacity-25 rounded-full">
+                                            1 Min
+                                        </span>
                                     </div>
                                 </div>
+                            </article>
 
-                            </div>
+                            <!-- Video 2: Bücherverwaltung -->
+                            <article class="flex flex-col bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden transition-all duration-300 hover:shadow-3xl hover:scale-105" data-aos="fade-up" data-aos-anchor="[data-aos-id-videos]" data-aos-delay="100">
+                                <div class="relative">
+                                    <video class="w-full" width="352" height="264" loop controls preload="metadata">
+                                        <source src="./videos/book_video.mov" type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="p-6 flex-grow flex flex-col">
+                                    <div class="flex items-center mb-3">
+                                        <svg class="w-5 h-5 text-purple-500 mr-2 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+                                        </svg>
+                                        <h3 class="text-xl font-bold font-red-hat-display">Bücherverwaltung</h3>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm">Bücher hinzufügen, bearbeiten und suchen - alles mit wenigen Klicks. ISBN-Scanner und automatische Metadaten-Erfassung inklusive.</p>
+                                    <div class="mt-auto pt-4">
+                                        <span class="inline-flex px-3 py-1 text-xs font-medium text-purple-600 bg-purple-100 dark:text-purple-400 dark:bg-purple-600 dark:bg-opacity-25 rounded-full">
+                                            2 Min
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Video 3: Nutzerverwaltung -->
+                            <article class="flex flex-col bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden transition-all duration-300 hover:shadow-3xl hover:scale-105" data-aos="fade-up" data-aos-anchor="[data-aos-id-videos]" data-aos-delay="200">
+                                <div class="relative">
+                                    <video class="w-full" width="352" height="264" loop controls preload="metadata">
+                                        <source src="./videos/user_video.mov" type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="p-6 flex-grow flex flex-col">
+                                    <div class="flex items-center mb-3">
+                                        <svg class="w-5 h-5 text-indigo-500 mr-2 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                                        </svg>
+                                        <h3 class="text-xl font-bold font-red-hat-display">Nutzerverwaltung</h3>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm">Verwalten Sie Leser:innen einfach und übersichtlich. Klassen, Gruppen und individuelle Profile - alles an einem Ort.</p>
+                                    <div class="mt-auto pt-4">
+                                        <span class="inline-flex px-3 py-1 text-xs font-medium text-indigo-600 bg-indigo-100 dark:text-indigo-400 dark:bg-indigo-600 dark:bg-opacity-25 rounded-full">
+                                            1 Min
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Video 4: Leihe -->
+                            <article class="flex flex-col bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden transition-all duration-300 hover:shadow-3xl hover:scale-105" data-aos="fade-up" data-aos-anchor="[data-aos-id-videos]" data-aos-delay="300">
+                                <div class="relative">
+                                    <video class="w-full" width="352" height="264" loop controls preload="metadata">
+                                        <source src="./videos/rent_video.mov" type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="p-6 flex-grow flex flex-col">
+                                    <div class="flex items-center mb-3">
+                                        <svg class="w-5 h-5 text-pink-500 mr-2 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                        </svg>
+                                        <h3 class="text-xl font-bold font-red-hat-display">Leihe</h3>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm">Ausleihe und Rückgabe in Sekunden. Barcode-Scanner unterstützt, automatische Fristberechnung und Erinnerungen.</p>
+                                    <div class="mt-auto pt-4">
+                                        <span class="inline-flex px-3 py-1 text-xs font-medium text-pink-600 bg-pink-100 dark:text-pink-400 dark:bg-pink-600 dark:bg-opacity-25 rounded-full">
+                                            2 Min
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <!-- Video 5: Reports -->
+                            <article class="flex flex-col bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden transition-all duration-300 hover:shadow-3xl hover:scale-105" data-aos="fade-up" data-aos-anchor="[data-aos-id-videos]" data-aos-delay="400">
+                                <div class="relative">
+                                    <video class="w-full" width="352" height="264" loop controls preload="metadata">
+                                        <source src="./videos/report_video.mov" type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="p-6 flex-grow flex flex-col">
+                                    <div class="flex items-center mb-3">
+                                        <svg class="w-5 h-5 text-teal-500 mr-2 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                                        </svg>
+                                        <h3 class="text-xl font-bold font-red-hat-display">Reports</h3>
+                                    </div>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm">Detaillierte Statistiken und Berichte über Ausleihen, beliebte Bücher und Nutzeraktivitäten - exportierbar als CSV.</p>
+                                    <div class="mt-auto pt-4">
+                                        <span class="inline-flex px-3 py-1 text-xs font-medium text-teal-600 bg-teal-100 dark:text-teal-400 dark:bg-teal-600 dark:bg-opacity-25 rounded-full">
+                                            1 Min
+                                        </span>
+                                    </div>
+                                </div>
+                            </article>
 
                         </div>
 
                     </div>
                 </div>
             </section>
-
-
 
             <!-- Testimonials -->
             <section>
@@ -713,9 +579,9 @@
                                             d="M2.785 5.334C2.538 5.5-.2 2.944.011 2.646.826 1.483 2.183.836 3.62.5 5.064.158 6.582.117 7.92-.02c.017-.002.098.153.088.166-1.763 2.018-3.223 3.836-5.221 5.188zm3.676 6.519c-.862.184-1.937-3.403-1.07-3.711 3.422-1.22 7.078-1.671 10.728-1.766 3.655-.096 7.304.162 10.866.32.044.002.06.177.018.187-6.938 1.634-13.691 3.504-20.542 4.97z" />
                                     </svg>
                                 </div>
-                                <blockquote class="text-xl text-gray-600 dark:text-gray-400"><a id="references_section">“ Unsere alte
+                                <blockquote class="text-xl text-gray-600 dark:text-gray-400"><a id="references_section">" Unsere alte
                                     Bibliothekssoftware wurde seit Jahren nicht gepflegt - endlich gibt es eine
-                                    Alternative! “</blockquote></a>
+                                    Alternative! "</blockquote></a>
                                 <div class="font-red-hat-display font-bold mt-2">
                                     <cite class="not-italic">—Annette G.</cite>
                                 </div>
@@ -732,9 +598,9 @@
                                             d="M2.785 5.334C2.538 5.5-.2 2.944.011 2.646.826 1.483 2.183.836 3.62.5 5.064.158 6.582.117 7.92-.02c.017-.002.098.153.088.166-1.763 2.018-3.223 3.836-5.221 5.188zm3.676 6.519c-.862.184-1.937-3.403-1.07-3.711 3.422-1.22 7.078-1.671 10.728-1.766 3.655-.096 7.304.162 10.866.32.044.002.06.177.018.187-6.938 1.634-13.691 3.504-20.542 4.97z" />
                                     </svg>
                                 </div>
-                                <blockquote class="text-xl text-gray-600 dark:text-gray-400">“ So viele Ehrenamtliche
+                                <blockquote class="text-xl text-gray-600 dark:text-gray-400">" So viele Ehrenamtliche
                                     engagieren sich an der Schule und jetzt haben wir endlich auch eine kostenlose
-                                    ehrenamtliche App, danke! “</blockquote>
+                                    ehrenamtliche App, danke! "</blockquote>
                                 <div class="font-red-hat-display font-bold mt-2">
                                     <cite class="not-italic">—Dr. Jure Zakotnik</cite>
                                 </div>
@@ -751,9 +617,9 @@
                                             d="M2.785 5.334C2.538 5.5-.2 2.944.011 2.646.826 1.483 2.183.836 3.62.5 5.064.158 6.582.117 7.92-.02c.017-.002.098.153.088.166-1.763 2.018-3.223 3.836-5.221 5.188zm3.676 6.519c-.862.184-1.937-3.403-1.07-3.711 3.422-1.22 7.078-1.671 10.728-1.766 3.655-.096 7.304.162 10.866.32.044.002.06.177.018.187-6.938 1.634-13.691 3.504-20.542 4.97z" />
                                     </svg>
                                 </div>
-                                <blockquote class="text-xl text-gray-600 dark:text-gray-400">“ Eine Cloud Lösung
+                                <blockquote class="text-xl text-gray-600 dark:text-gray-400">" Eine Cloud Lösung
                                     irgendwo wollte ich nicht. Mit OpenLibry konnte unser Nerd das auf unserem Server
-                                    insallieren. “</blockquote>
+                                    installieren. "</blockquote>
                                 <div class="font-red-hat-display font-bold mt-2">
                                     <cite class="not-italic">—Sina Klickmann</cite>
                                 </div>
@@ -770,8 +636,8 @@
                                             d="M2.785 5.334C2.538 5.5-.2 2.944.011 2.646.826 1.483 2.183.836 3.62.5 5.064.158 6.582.117 7.92-.02c.017-.002.098.153.088.166-1.763 2.018-3.223 3.836-5.221 5.188zm3.676 6.519c-.862.184-1.937-3.403-1.07-3.711 3.422-1.22 7.078-1.671 10.728-1.766 3.655-.096 7.304.162 10.866.32.044.002.06.177.018.187-6.938 1.634-13.691 3.504-20.542 4.97z" />
                                     </svg>
                                 </div>
-                                <blockquote class="text-xl text-gray-600 dark:text-gray-400">“ Mit wenigen Klicks zum
-                                    Ziel, OpenLibry ist schon bequemer als die alte Software, die wir vorher hatten.“</blockquote>
+                                <blockquote class="text-xl text-gray-600 dark:text-gray-400">" Mit wenigen Klicks zum
+                                    Ziel, OpenLibry ist schon bequemer als die alte Software, die wir vorher hatten."</blockquote>
                                 <div class="font-red-hat-display font-bold mt-2">
                                     <cite class="not-italic">—Johanna Mieschmann</cite>
                                 </div>
@@ -783,14 +649,17 @@
                 </div>
             </section>
 
-            <!-- Features -->
+            <!-- Architecture & Installation Section -->
             <section>
                 <div class="max-w-6xl mx-auto px-4 sm:px-6">
                     <div class="py-12 md:py-20 border-t border-gray-200 dark:border-gray-800">
 
                         <!-- Section header -->
                         <div class="max-w-3xl mx-auto text-center pb-12 md:pb-20">
+                            <a id="installation_section">
                             <h2 class="h2 font-red-hat-display">Freie und offene Architektur</h2>
+                            <p class="text-xl text-gray-600 dark:text-gray-400 mt-4">Volle Kontrolle über Ihre Daten - installieren Sie OpenLibry auf Ihrer eigenen Infrastruktur</p>
+                            </a>
                         </div>
 
                         <!-- Items -->
@@ -875,6 +744,67 @@
 
                         </div>
 
+                        <!-- Docker Installation Section -->
+                        <div class="mt-16 md:mt-20" data-aos="fade-up">
+                            <div class="max-w-4xl mx-auto bg-gray-900 dark:bg-gray-950 rounded-lg shadow-2xl overflow-hidden">
+                                <div class="bg-gradient-to-r from-teal-500 to-purple-500 px-6 py-4">
+                                    <h3 class="text-xl font-bold text-white font-red-hat-display flex items-center">
+                                        <svg class="w-6 h-6 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M20.5 16h-.5v-1.25c0-.69-.31-1.25-.8-1.25s-.8.56-.8 1.25V16h-1.4v-1.25c0-.69-.31-1.25-.8-1.25s-.8.56-.8 1.25V16H14V9h1.5v.5c.31-.31.81-.5 1.3-.5 1.03 0 1.8.71 2.2 1.5.51-.79 1.28-1.5 2.2-1.5 1.36 0 2.3 1.15 2.3 2.5V16h-1.5v2H20v-2zM11 16H9.5v-1.25c0-.69-.31-1.25-.8-1.25s-.8.56-.8 1.25V16H6.5v-1.25c0-.69-.31-1.25-.8-1.25s-.8.56-.8 1.25V16H3.5V9H5v.5c.31-.31.81-.5 1.3-.5 1.03 0 1.8.71 2.2 1.5.51-.79 1.28-1.5 2.2-1.5 1.36 0 2.3 1.15 2.3 2.5V16h-1.5v2H11v-2z"/>
+                                        </svg>
+                                        Installation mit Docker - So einfach geht's
+                                    </h3>
+                                </div>
+                                <div class="p-6 md:p-8">
+                                    <p class="text-gray-300 text-lg mb-6">OpenLibry lässt sich mit wenigen Befehlen auf jedem System mit Docker installieren. Hier sehen Sie, wie schnell Sie starten können:</p>
+                                    
+                                    <!-- Terminal Window with GIF -->
+                                    <div class="bg-black rounded-lg border-2 border-gray-700 overflow-hidden mb-8">
+                                       
+                                        <img src="./images/docker-installation.gif" alt="Docker Installation Animation - Terminal showing OpenLibry installation process" class="w-full" />
+                                    </div>
+
+                                    <!-- Quick Start Guide -->
+                                    <div class="border-t border-gray-700 pt-6">
+                                        <h4 class="text-white font-bold text-lg mb-4 flex items-center">
+                                            <svg class="w-5 h-5 mr-2 text-teal-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                                            </svg>
+                                            Schnellstart-Anleitung
+                                        </h4>
+                                        <ol class="space-y-3 text-gray-300 mb-6">
+                                            <li class="flex items-start">
+                                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-teal-500 text-white rounded-full text-sm font-bold mr-3">1</span>
+                                                <span>Docker Desktop installieren (falls noch nicht vorhanden)</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-teal-500 text-white rounded-full text-sm font-bold mr-3">2</span>
+                                                <span>Terminal öffnen und Befehl ausführen: <code class="bg-gray-800 px-2 py-1 rounded text-teal-400 text-sm">docker compose up</code></span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-teal-500 text-white rounded-full text-sm font-bold mr-3">3</span>
+                                                <span>Container starten und im Browser <code class="bg-gray-800 px-2 py-1 rounded text-teal-400 text-sm">localhost:3000</code> aufrufen</span>
+                                            </li>
+                                        </ol>
+                                        <div class="flex flex-wrap gap-3">
+                                            <a href="https://github.com/jzakotnik/openlibry/blob/main/README.md" class="inline-flex items-center px-4 py-2 bg-teal-500 hover:bg-teal-400 text-white rounded-lg transition-colors duration-200">
+                                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                                                </svg>
+                                                Vollständige Dokumentation
+                                            </a>
+                                            <a href="https://github.com/jzakotnik/openlibry/blob/main/docker-compose.yml" class="inline-flex items-center px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors duration-200">
+                                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                </svg>
+                                                Docker Compose Datei
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -918,8 +848,8 @@
                             <form class="w-full lg:w-1/2">
                                 <div
                                     class="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:max-w-none">
-                                    <input type="tel" class="form-input text-gray-100 w-full mb-2 sm:mb-0 sm:mr-2"
-                                        placeholder="Meine eMail Adressse" aria-label="Phone number" />
+                                    <input type="email" class="form-input text-gray-100 w-full mb-2 sm:mb-0 sm:mr-2"
+                                        placeholder="Meine eMail Adresse" aria-label="Email address" />
                                     <a class="btn text-white bg-teal-500 hover:bg-teal-400 shrink-0"
                                         href="mailto:info@openlibry.de">e-Mail</a>
                                 </div>
