@@ -1,0 +1,11 @@
+# OpenLibry Website - robots.txt
+# https://openlibry.de/
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://openlibry.de/sitemap.xml
+
+# Crawl-delay (optional, be nice to servers)
+Crawl-delay: 1
