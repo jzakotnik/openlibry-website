@@ -748,7 +748,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
             
-            const response = await fetch('https://mail.openlibry.de', {
+            const response = await fetch('https://mail.openlibry.de/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
