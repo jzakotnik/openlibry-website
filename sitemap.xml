@@ -1,15 +1,258 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://openlibry.de/</loc>
-    <lastmod>2024-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-      <loc>https://openlibry.de/site/</loc>
-    <lastmod>2025-12-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    </url>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://openlibry.de/</loc>
+  <lastmod>2025-12-24T12:39:33+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/</loc>
+  <lastmod>2025-12-24T12:49:11+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+<url>
+  <loc>https://openlibry.de/site/getting-started/</loc>
+  <lastmod>2025-12-24T12:49:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/getting-started/introduction/</loc>
+  <lastmod>2025-12-24T12:49:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/getting-started/quickstart/</loc>
+  <lastmod>2025-12-24T12:49:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/getting-started/requirements/</loc>
+  <lastmod>2025-12-24T12:49:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/getting-started/first-steps/</loc>
+  <lastmod>2025-12-24T12:49:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/installation/</loc>
+  <lastmod>2025-12-24T12:49:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/installation/container/</loc>
+  <lastmod>2025-12-24T12:49:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/installation/ohne-container/</loc>
+  <lastmod>2025-12-24T12:49:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/installation/nginx-ssl/</loc>
+  <lastmod>2025-12-24T12:49:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/installation/upgrading/</loc>
+  <lastmod>2025-12-24T12:49:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/user-guide/</loc>
+  <lastmod>2025-12-24T12:49:13+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/user-guide/lending/</loc>
+  <lastmod>2025-12-24T12:49:13+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/user-guide/book-management/</loc>
+  <lastmod>2025-12-24T12:49:13+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/user-guide/user-management/</loc>
+  <lastmod>2025-12-24T12:49:13+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/user-guide/reports/</loc>
+  <lastmod>2025-12-24T12:49:13+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/user-guide/tips-tricks/</loc>
+  <lastmod>2025-12-24T12:49:13+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/import/</loc>
+  <lastmod>2025-12-24T12:49:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/import/excel-generic/</loc>
+  <lastmod>2025-12-24T12:49:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/import/meine-bibliothek/</loc>
+  <lastmod>2025-12-24T12:49:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/import/openbiblio/</loc>
+  <lastmod>2025-12-24T12:49:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/import/isbn-lookup/</loc>
+  <lastmod>2025-12-24T12:49:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/import/api-import/</loc>
+  <lastmod>2025-12-24T12:49:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/export/</loc>
+  <lastmod>2025-12-24T12:49:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/export/excel-export/</loc>
+  <lastmod>2025-12-24T12:49:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/export/backup-restore/</loc>
+  <lastmod>2025-12-24T12:49:10+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/configuration/</loc>
+  <lastmod>2025-12-24T12:49:08+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/configuration/environment-variables/</loc>
+  <lastmod>2025-12-24T12:49:08+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/configuration/book-labels/</loc>
+  <lastmod>2025-12-24T12:49:08+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/configuration/user-cards/</loc>
+  <lastmod>2025-12-24T12:49:08+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/configuration/reminders/</loc>
+  <lastmod>2025-12-24T12:49:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/configuration/antolin/</loc>
+  <lastmod>2025-12-24T12:49:08+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/configuration/authentication/</loc>
+  <lastmod>2025-12-24T12:49:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/troubleshooting/</loc>
+  <lastmod>2025-12-24T12:49:12+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/troubleshooting/docker-issues/</loc>
+  <lastmod>2025-12-24T12:49:12+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/troubleshooting/database-issues/</loc>
+  <lastmod>2025-12-24T12:49:12+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/troubleshooting/performance/</loc>
+  <lastmod>2025-12-24T12:49:13+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/development/</loc>
+  <lastmod>2025-12-24T12:49:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/development/architecture/</loc>
+  <lastmod>2025-12-24T12:49:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/development/api-reference/</loc>
+  <lastmod>2025-12-24T12:49:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/development/local-development/</loc>
+  <lastmod>2025-12-24T12:49:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/development/testing/</loc>
+  <lastmod>2025-12-24T12:49:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/development/contributing/</loc>
+  <lastmod>2025-12-24T12:49:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/reference/</loc>
+  <lastmod>2025-12-24T12:49:11+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/reference/changelog/</loc>
+  <lastmod>2025-12-24T12:49:12+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/reference/data-model/</loc>
+  <lastmod>2025-12-24T12:49:12+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/reference/glossary/</loc>
+  <lastmod>2025-12-24T12:49:12+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://openlibry.de/site/reference/credits/</loc>
+  <lastmod>2025-12-24T12:49:12+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
 </urlset>
