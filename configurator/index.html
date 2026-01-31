@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenLibry .env Generator</title>
+  <style>
+    :root {
+      --primary: #1976d2;
+      --primary-dark: #1565c0;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --text: #333;
+      --text-muted: #666;
+      --border: #e0e0e0;
+      --success: #4caf50;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem;
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    header p {
+      opacity: 0.9;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .section-header:hover {
+      background: rgba(0,0,0,0.03);
+    }
+
+    .section-header h2 {
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .chevron {
+      transition: transform 0.3s;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+    }
+
+    .chevron.open {
+      transform: rotate(180deg);
+    }
+
+    .section-content {
+      padding: 0 1.25rem 1.25rem;
+      display: none;
+    }
+
+    .section-content.open {
+      display: block;
+    }
+
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+      color: var(--text);
+    }
+
+    label code {
+      font-weight: normal;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+    }
+
+    .toggle-field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+    }
+
+    .toggle-field > span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .toggle-field > span code {
+      font-weight: normal;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .toggle {
+      position: relative;
+      display: block;
+      width: 48px;
+      height: 26px;
+      cursor: pointer;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #ccc;
+      border-radius: 26px;
+      transition: 0.3s;
+    }
+
+    .toggle-slider:before {
+      content: "";
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background: var(--primary);
+    }
+
+    .toggle input:checked + .toggle-slider:before {
+      transform: translateX(22px);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    button {
+      flex: 1;
+      padding: 0.9rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #f5f5f5;
+    }
+
+    .preview {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: 'Fira Code', 'Consolas', monospace;
+      font-size: 0.8rem;
+      max-height: 400px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .preview .comment {
+      color: #6a9955;
+    }
+
+    .preview .key {
+      color: #9cdcfe;
+    }
+
+    .preview .value {
+      color: #ce9178;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--success);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .presets {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .preset-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      background: rgba(25, 118, 210, 0.1);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .preset-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📚 OpenLibry .env Generator</h1>
+      <p>Erstelle deine Konfigurationsdatei für OpenLibry</p>
+    </header>
+
+    <!-- Presets -->
+    <div class="card">
+      <div class="section-content open" style="padding-top: 1.25rem;">
+        <label>Schnellstart-Vorlagen</label>
+        <div class="presets">
+          <button type="button" class="preset-btn" onclick="applyPreset('raspi')">🍓 Raspberry Pi</button>
+          <button type="button" class="preset-btn" onclick="applyPreset('docker')">🐳 Docker</button>
+          <button type="button" class="preset-btn" onclick="applyPreset('dev')">💻 Entwicklung</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Configuration -->
+    <div class="card">
+      <div class="section-header" onclick="toggleSection('technical')">
+        <h2><span class="icon">🔧</span> Technische Konfiguration</h2>
+        <span class="chevron open" id="chevron-technical">▼</span>
+      </div>
+      <div class="section-content open" id="section-technical">
+        <div class="field">
+          <label>Datenbank-URL <code>DATABASE_URL</code></label>
+          <input type="text" id="DATABASE_URL" value="file:./database/dev.db">
+          <p class="hint">SQLite-Pfad, z.B. file:./database/dev.db</p>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>NextAuth URL <code>NEXTAUTH_URL</code></label>
+            <input type="text" id="NEXTAUTH_URL" value="http://localhost:3000">
+          </div>
+          <div class="field">
+            <label>NextAuth Secret <code>NEXTAUTH_SECRET</code></label>
+            <input type="text" id="NEXTAUTH_SECRET" value="">
+          </div>
+        </div>
+
+        <div class="field toggle-field">
+          <span>Authentifizierung aktiviert <code>AUTH_ENABLED</code></span>
+          <label class="toggle">
+            <input type="checkbox" id="AUTH_ENABLED">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="field">
+          <label>Cover-Bilder Pfad <code>COVERIMAGE_FILESTORAGE_PATH</code></label>
+          <input type="text" id="COVERIMAGE_FILESTORAGE_PATH" value="./public/images">
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Session Timeout (Sekunden) <code>LOGIN_SESSION_TIMEOUT</code></label>
+            <input type="number" id="LOGIN_SESSION_TIMEOUT" value="3600">
+          </div>
+          <div class="field">
+            <label>Max. Migrationsgröße <code>MAX_MIGRATION_SIZE</code></label>
+            <input type="text" id="MAX_MIGRATION_SIZE" value="250mb">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Security Headers <code>SECURITY_HEADERS</code></label>
+            <select id="SECURITY_HEADERS">
+              <option value="insecure">insecure (Entwicklung)</option>
+              <option value="secure">secure (Produktion)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Lösch-Verzögerung (Sek.) <code>DELETE_SAFETY_SECONDS</code></label>
+            <input type="number" id="DELETE_SAFETY_SECONDS" value="5">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Ausleihe Sortierung <code>RENTAL_SORT_BOOKS</code></label>
+            <select id="RENTAL_SORT_BOOKS">
+              <option value="title_asc">Titel (A-Z)</option>
+              <option value="title_desc">Titel (Z-A)</option>
+              <option value="id_asc">ID (aufsteigend)</option>
+              <option value="id_desc">ID (absteigend)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Min. Barcode-Länge <code>BARCODE_MINCODELENGTH</code></label>
+            <input type="number" id="BARCODE_MINCODELENGTH" value="3">
+          </div>
+        </div>
+
+        <div class="field toggle-field">
+          <span>Backup-Button anzeigen <code>ADMIN_BUTTON_SWITCH</code></span>
+          <label class="toggle">
+            <input type="checkbox" id="ADMIN_BUTTON_SWITCH" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Business Configuration -->
+    <div class="card">
+      <div class="section-header" onclick="toggleSection('business')">
+        <h2><span class="icon">🏫</span> Schul-Konfiguration</h2>
+        <span class="chevron open" id="chevron-business">▼</span>
+      </div>
+      <div class="section-content open" id="section-business">
+        <div class="row">
+          <div class="field">
+            <label>Schulname <code>SCHOOL_NAME</code></label>
+            <input type="text" id="SCHOOL_NAME" value="Mustermann Schule">
+          </div>
+          <div class="field">
+            <label>Logo-Datei <code>LOGO_LABEL</code></label>
+            <input type="text" id="LOGO_LABEL" value="schullogo.jpg">
+            <p class="hint">Dateiname im /public Ordner</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Verlängerungsdauer (Tage) <code>EXTENSION_DURATION_DAYS</code></label>
+            <input type="number" id="EXTENSION_DURATION_DAYS" value="22">
+          </div>
+          <div class="field">
+            <label>Bücher pro Seite <code>NUMBER_BOOKS_OVERVIEW</code></label>
+            <input type="number" id="NUMBER_BOOKS_OVERVIEW" value="20">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Maximale Bücherzahl <code>NUMBER_BOOKS_MAX</code></label>
+          <input type="number" id="NUMBER_BOOKS_MAX" value="10000">
+          <p class="hint">Für Skalierung der Suche/Paginierung</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reminder Configuration -->
+    <div class="card">
+      <div class="section-header" onclick="toggleSection('reminder')">
+        <h2><span class="icon">📧</span> Mahnungs-Konfiguration</h2>
+        <span class="chevron" id="chevron-reminder">▼</span>
+      </div>
+      <div class="section-content" id="section-reminder">
+        <div class="field">
+          <label>Mahnungs-Vorlage <code>REMINDER_TEMPLATE_DOC</code></label>
+          <input type="text" id="REMINDER_TEMPLATE_DOC" value="mahnung-template.docx">
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Verantwortlicher Name <code>REMINDER_RESPONSIBLE_NAME</code></label>
+            <input type="text" id="REMINDER_RESPONSIBLE_NAME" value="Schulbücherei">
+          </div>
+          <div class="field">
+            <label>Kontakt E-Mail <code>REMINDER_RESPONSIBLE_EMAIL</code></label>
+            <input type="text" id="REMINDER_RESPONSIBLE_EMAIL" value="info@email.de">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Anzahl Verlängerungen <code>REMINDER_RENEWAL_COUNT</code></label>
+          <input type="number" id="REMINDER_RENEWAL_COUNT" value="5">
+          <p class="hint">Bevor Eskalation erfolgt</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Book Label Configuration -->
+    <div class="card">
+      <div class="section-header" onclick="toggleSection('bookLabel')">
+        <h2><span class="icon">🏷️</span> Buch-Etiketten</h2>
+        <span class="chevron" id="chevron-bookLabel">▼</span>
+      </div>
+      <div class="section-content" id="section-bookLabel">
+        <p class="hint" style="margin-bottom: 1rem;">Alle Maße in Zentimetern (cm)</p>
+        
+        <div class="row">
+          <div class="field">
+            <label>Rand links <code>BOOKLABEL_MARGIN_LEFT</code></label>
+            <input type="number" step="0.1" id="BOOKLABEL_MARGIN_LEFT" value="3">
+          </div>
+          <div class="field">
+            <label>Rand oben <code>BOOKLABEL_MARGIN_TOP</code></label>
+            <input type="number" step="0.1" id="BOOKLABEL_MARGIN_TOP" value="2">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Etikett-Breite <code>BOOKLABEL_LABEL_WIDTH</code></label>
+            <input type="number" step="0.1" id="BOOKLABEL_LABEL_WIDTH" value="7.0">
+          </div>
+          <div class="field">
+            <label>Etikett-Höhe <code>BOOKLABEL_LABEL_HEIGHT</code></label>
+            <input type="number" step="0.1" id="BOOKLABEL_LABEL_HEIGHT" value="3.2">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Zeilen pro Seite <code>BOOKLABEL_ROWSONPAGE</code></label>
+            <input type="number" id="BOOKLABEL_ROWSONPAGE" value="5">
+          </div>
+          <div class="field">
+            <label>Spalten pro Seite <code>BOOKLABEL_COLUMNSONPAGE</code></label>
+            <input type="number" id="BOOKLABEL_COLUMNSONPAGE" value="2">
+          </div>
+        </div>
+
+        <div class="field toggle-field">
+          <span>Rahmen drucken (Kalibrierung) <code>BOOKLABEL_PRINT_LABEL_FRAME</code></span>
+          <label class="toggle">
+            <input type="checkbox" id="BOOKLABEL_PRINT_LABEL_FRAME">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Abstand horizontal <code>BOOKLABEL_LABEL_SPACING_HORIZONTAL</code></label>
+            <input type="number" step="0.1" id="BOOKLABEL_LABEL_SPACING_HORIZONTAL" value="1.7">
+          </div>
+          <div class="field">
+            <label>Abstand vertikal <code>BOOKLABEL_LABEL_SPACING_VERTICAL</code></label>
+            <input type="number" step="0.1" id="BOOKLABEL_LABEL_SPACING_VERTICAL" value="2.2">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Barcode-Breite <code>BOOKLABEL_BARCODE_WIDTH</code></label>
+            <input type="text" id="BOOKLABEL_BARCODE_WIDTH" value="3cm">
+          </div>
+          <div class="field">
+            <label>Barcode-Höhe <code>BOOKLABEL_BARCODE_HEIGHT</code></label>
+            <input type="text" id="BOOKLABEL_BARCODE_HEIGHT" value="1.6cm">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Logo-Datei <code>BOOKLABEL_LOGO</code></label>
+          <input type="text" id="BOOKLABEL_LOGO" value="schullogo_buchlabel.png">
+        </div>
+      </div>
+    </div>
+
+    <!-- User Label Configuration -->
+    <div class="card">
+      <div class="section-header" onclick="toggleSection('userLabel')">
+        <h2><span class="icon">🆔</span> Benutzer-Ausweise</h2>
+        <span class="chevron" id="chevron-userLabel">▼</span>
+      </div>
+      <div class="section-content" id="section-userLabel">
+        <div class="field">
+          <label>Hintergrund-Vorlage <code>USERID_LABEL_IMAGE</code></label>
+          <input type="text" id="USERID_LABEL_IMAGE" value="userlabeltemplate.jpg">
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Ausweis-Breite <code>USERLABEL_WIDTH</code></label>
+            <input type="text" id="USERLABEL_WIDTH" value="42vw">
+          </div>
+          <div class="field">
+            <label>Ausweise pro Seite <code>USERLABEL_PER_PAGE</code></label>
+            <input type="number" id="USERLABEL_PER_PAGE" value="6">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview & Download -->
+    <div class="card">
+      <div class="section-header" onclick="toggleSection('preview')">
+        <h2><span class="icon">👁️</span> Vorschau</h2>
+        <span class="chevron" id="chevron-preview">▼</span>
+      </div>
+      <div class="section-content" id="section-preview">
+        <pre class="preview" id="preview-content"></pre>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button type="button" class="btn-secondary" onclick="resetToDefaults()">
+        🔄 Zurücksetzen
+      </button>
+      <button type="button" class="btn-primary" onclick="downloadEnv()">
+        ⬇️ .env herunterladen
+      </button>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script>
+    // Generate random secret on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('NEXTAUTH_SECRET').value = generateSecret();
+      updatePreview();
+      
+      // Add change listeners to all inputs
+      document.querySelectorAll('input, select').forEach(el => {
+        el.addEventListener('input', updatePreview);
+        el.addEventListener('change', updatePreview);
+      });
+    });
+
+    function generateSecret() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      for (let i = 0; i < 32; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    function toggleSection(name) {
+      const section = document.getElementById('section-' + name);
+      const chevron = document.getElementById('chevron-' + name);
+      section.classList.toggle('open');
+      chevron.classList.toggle('open');
+      
+      if (name === 'preview' && section.classList.contains('open')) {
+        updatePreview();
+      }
+    }
+
+    function getValue(id) {
+      const el = document.getElementById(id);
+      if (el.type === 'checkbox') {
+        return el.checked;
+      }
+      return el.value;
+    }
+
+    function setValue(id, value) {
+      const el = document.getElementById(id);
+      if (el.type === 'checkbox') {
+        el.checked = value;
+      } else if (el.tagName === 'SELECT') {
+        el.value = value;
+      } else {
+        el.value = value;
+      }
+    }
+
+    function applyPreset(preset) {
+      if (preset === 'raspi') {
+        setValue('DATABASE_URL', 'file:/home/pi/openlibry/database/prod.db');
+        setValue('NEXTAUTH_URL', 'http://raspberrypi.local:3000');
+        setValue('COVERIMAGE_FILESTORAGE_PATH', '/home/pi/openlibry/images');
+        setValue('AUTH_ENABLED', true);
+        setValue('SECURITY_HEADERS', 'secure');
+        showToast('🍓 Raspberry Pi Vorlage angewendet');
+      } else if (preset === 'docker') {
+        setValue('DATABASE_URL', 'file:/app/database/prod.db');
+        setValue('NEXTAUTH_URL', 'http://localhost:3000');
+        setValue('COVERIMAGE_FILESTORAGE_PATH', '/app/images');
+        setValue('AUTH_ENABLED', true);
+        setValue('SECURITY_HEADERS', 'secure');
+        showToast('🐳 Docker Vorlage angewendet');
+      } else if (preset === 'dev') {
+        setValue('DATABASE_URL', 'file:./database/dev.db');
+        setValue('NEXTAUTH_URL', 'http://localhost:3000');
+        setValue('COVERIMAGE_FILESTORAGE_PATH', './public/images');
+        setValue('AUTH_ENABLED', false);
+        setValue('SECURITY_HEADERS', 'insecure');
+        showToast('💻 Entwicklungs-Vorlage angewendet');
+      }
+      updatePreview();
+    }
+
+    function generateEnv() {
+      const schoolName = getValue('SCHOOL_NAME');
+      
+      const lines = [
+        '#############################################',
+        '# 🔧 TECHNICAL CONFIGURATION',
+        '#############################################',
+        '',
+        `DATABASE_URL="${getValue('DATABASE_URL')}"`,
+        `NEXTAUTH_URL=${getValue('NEXTAUTH_URL')}`,
+        `NEXTAUTH_SECRET=${getValue('NEXTAUTH_SECRET')}`,
+        `AUTH_ENABLED=${getValue('AUTH_ENABLED')}`,
+        `COVERIMAGE_FILESTORAGE_PATH=${getValue('COVERIMAGE_FILESTORAGE_PATH')}`,
+        `LOGIN_SESSION_TIMEOUT=${getValue('LOGIN_SESSION_TIMEOUT')}`,
+        `MAX_MIGRATION_SIZE=${getValue('MAX_MIGRATION_SIZE')}`,
+        `SECURITY_HEADERS=${getValue('SECURITY_HEADERS')}`,
+        `DELETE_SAFETY_SECONDS=${getValue('DELETE_SAFETY_SECONDS')}`,
+        `RENTAL_SORT_BOOKS="${getValue('RENTAL_SORT_BOOKS')}"`,
+        `BARCODE_MINCODELENGTH=${getValue('BARCODE_MINCODELENGTH')}`,
+        `ADMIN_BUTTON_SWITCH=${getValue('ADMIN_BUTTON_SWITCH') ? 1 : 0}`,
+        '',
+        '#############################################',
+        '# 🏫 BUSINESS CONFIGURATION',
+        '#############################################',
+        '',
+        `SCHOOL_NAME="${schoolName}"`,
+        `LOGO_LABEL="${getValue('LOGO_LABEL')}"`,
+        `EXTENSION_DURATION_DAYS=${getValue('EXTENSION_DURATION_DAYS')}`,
+        `NUMBER_BOOKS_OVERVIEW=${getValue('NUMBER_BOOKS_OVERVIEW')}`,
+        `NUMBER_BOOKS_MAX=${getValue('NUMBER_BOOKS_MAX')}`,
+        '',
+        '#############################################',
+        '# 📧 REMINDER (MAHNUNG) CONFIGURATION',
+        '#############################################',
+        '',
+        `REMINDER_TEMPLATE_DOC="${getValue('REMINDER_TEMPLATE_DOC')}"`,
+        `REMINDER_RESPONSIBLE_NAME="${getValue('REMINDER_RESPONSIBLE_NAME')}"`,
+        `REMINDER_RESPONSIBLE_EMAIL="${getValue('REMINDER_RESPONSIBLE_EMAIL')}"`,
+        `REMINDER_RENEWAL_COUNT=${getValue('REMINDER_RENEWAL_COUNT')}`,
+        '',
+        '#############################################',
+        '# 🏷️ BOOK LABEL CONFIGURATION',
+        '#############################################',
+        '',
+        `BOOKLABEL_MARGIN_LEFT=${getValue('BOOKLABEL_MARGIN_LEFT')}`,
+        `BOOKLABEL_MARGIN_TOP=${getValue('BOOKLABEL_MARGIN_TOP')}`,
+        `BOOKLABEL_LABEL_WIDTH=${getValue('BOOKLABEL_LABEL_WIDTH')}`,
+        `BOOKLABEL_LABEL_HEIGHT=${getValue('BOOKLABEL_LABEL_HEIGHT')}`,
+        `BOOKLABEL_ROWSONPAGE=${getValue('BOOKLABEL_ROWSONPAGE')}`,
+        `BOOKLABEL_COLUMNSONPAGE=${getValue('BOOKLABEL_COLUMNSONPAGE')}`,
+        `BOOKLABEL_PRINT_LABEL_FRAME=${getValue('BOOKLABEL_PRINT_LABEL_FRAME')}`,
+        `BOOKLABEL_LABEL_SPACING_HORIZONTAL=${getValue('BOOKLABEL_LABEL_SPACING_HORIZONTAL')}`,
+        `BOOKLABEL_LABEL_SPACING_VERTICAL=${getValue('BOOKLABEL_LABEL_SPACING_VERTICAL')}`,
+        `BOOKLABEL_BARCODE_WIDTH="${getValue('BOOKLABEL_BARCODE_WIDTH')}"`,
+        `BOOKLABEL_BARCODE_HEIGHT="${getValue('BOOKLABEL_BARCODE_HEIGHT')}"`,
+        `BOOKLABEL_LOGO=${getValue('BOOKLABEL_LOGO')}`,
+        '',
+        '# Advanced label settings (using defaults)',
+        'BOOKLABEL_MARGIN_IN_LABEL=0.05',
+        'BOOKLABEL_AUTHORLINE=["Book.author",9,"center"]',
+        'BOOKLABEL_AUTHOR_SPACING="1.8"',
+        'BOOKLABEL_MAX_AUTHORLINE_LENGTH="38"',
+        'BOOKLABEL_LINE_ABOVE=["Book.title",10,"left"]',
+        'BOOKLABEL_LINE_ABOVE_USE_MAX_SPACE=true',
+        'BOOKLABEL_LINE_BELOW_1=["firstTopic",10,"left"]',
+        'BOOKLABEL_LINE_BELOW_1_LENGTH="32"',
+        `BOOKLABEL_LINE_BELOW_2=["${schoolName}",10,"left"]`,
+        'BOOKLABEL_BARCODE_VERSION="code128"',
+        'BOOKLABEL_BARCODE_PLACEHOLDER="barcode"',
+        '',
+        '#############################################',
+        '# 🆔 USER LABEL CONFIGURATION',
+        '#############################################',
+        '',
+        `USERID_LABEL_IMAGE=${getValue('USERID_LABEL_IMAGE')}`,
+        `USERLABEL_WIDTH="${getValue('USERLABEL_WIDTH')}"`,
+        `USERLABEL_PER_PAGE=${getValue('USERLABEL_PER_PAGE')}`,
+        '',
+        '# Advanced user label settings (using defaults)',
+        'USERLABEL_SEPARATE_COLORBAR=[250,70,"lightgreen"]',
+        'USERLABEL_LINE_1=["User.firstName User.lastName","75%","3%","35vw","2pt","black",14]',
+        `USERLABEL_LINE_2=["${schoolName}","83%","3%","35vw","2pt","black",10]`,
+        'USERLABEL_LINE_3=["User.schoolGrade","90%","3%","35vw","2pt","black",12]',
+        'USERLABEL_BARCODE=["80%","63%","3cm","1.6cm","code128"]',
+      ];
+      return lines.join('\n');
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function updatePreview() {
+      const env = generateEnv();
+      const html = env
+        .split('\n')
+        .map(line => {
+          if (line.startsWith('#')) {
+            return `<span class="comment">${escapeHtml(line)}</span>`;
+          }
+          if (line.includes('=')) {
+            const [key, ...valueParts] = line.split('=');
+            const value = valueParts.join('=');
+            return `<span class="key">${escapeHtml(key)}</span>=<span class="value">${escapeHtml(value)}</span>`;
+          }
+          return escapeHtml(line);
+        })
+        .join('\n');
+      
+      document.getElementById('preview-content').innerHTML = html;
+    }
+
+    function downloadEnv() {
+      const content = generateEnv();
+      const blob = new Blob([content], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '.env';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('✅ .env Datei heruntergeladen!');
+    }
+
+    function resetToDefaults() {
+      setValue('DATABASE_URL', 'file:./database/dev.db');
+      setValue('NEXTAUTH_URL', 'http://localhost:3000');
+      setValue('NEXTAUTH_SECRET', generateSecret());
+      setValue('AUTH_ENABLED', false);
+      setValue('COVERIMAGE_FILESTORAGE_PATH', './public/images');
+      setValue('LOGIN_SESSION_TIMEOUT', '3600');
+      setValue('MAX_MIGRATION_SIZE', '250mb');
+      setValue('SECURITY_HEADERS', 'insecure');
+      setValue('DELETE_SAFETY_SECONDS', '5');
+      setValue('RENTAL_SORT_BOOKS', 'title_asc');
+      setValue('BARCODE_MINCODELENGTH', '3');
+      setValue('ADMIN_BUTTON_SWITCH', true);
+      
+      setValue('SCHOOL_NAME', 'Mustermann Schule');
+      setValue('LOGO_LABEL', 'schullogo.jpg');
+      setValue('EXTENSION_DURATION_DAYS', '22');
+      setValue('NUMBER_BOOKS_OVERVIEW', '20');
+      setValue('NUMBER_BOOKS_MAX', '10000');
+      
+      setValue('REMINDER_TEMPLATE_DOC', 'mahnung-template.docx');
+      setValue('REMINDER_RESPONSIBLE_NAME', 'Schulbücherei');
+      setValue('REMINDER_RESPONSIBLE_EMAIL', 'info@email.de');
+      setValue('REMINDER_RENEWAL_COUNT', '5');
+      
+      setValue('BOOKLABEL_MARGIN_LEFT', '3');
+      setValue('BOOKLABEL_MARGIN_TOP', '2');
+      setValue('BOOKLABEL_LABEL_WIDTH', '7.0');
+      setValue('BOOKLABEL_LABEL_HEIGHT', '3.2');
+      setValue('BOOKLABEL_ROWSONPAGE', '5');
+      setValue('BOOKLABEL_COLUMNSONPAGE', '2');
+      setValue('BOOKLABEL_PRINT_LABEL_FRAME', false);
+      setValue('BOOKLABEL_LABEL_SPACING_HORIZONTAL', '1.7');
+      setValue('BOOKLABEL_LABEL_SPACING_VERTICAL', '2.2');
+      setValue('BOOKLABEL_BARCODE_WIDTH', '3cm');
+      setValue('BOOKLABEL_BARCODE_HEIGHT', '1.6cm');
+      setValue('BOOKLABEL_LOGO', 'schullogo_buchlabel.png');
+      
+      setValue('USERID_LABEL_IMAGE', 'userlabeltemplate.jpg');
+      setValue('USERLABEL_WIDTH', '42vw');
+      setValue('USERLABEL_PER_PAGE', '6');
+      
+      updatePreview();
+      showToast('🔄 Auf Standardwerte zurückgesetzt');
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
