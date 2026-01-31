@@ -1029,17 +1029,19 @@ h1, h2, h3, h4, h5, h6 {
 .terminal-dot.green { background: #28c840; }
 
 .terminal-content {
-  padding: var(--space-6);
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--color-gray-300);
-  line-height: 1.8;
-  overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-4);
 }
 
 .terminal-line {
-  display: block;
-  white-space: pre;
+    display: block;
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
 }
 
 .terminal-prompt {
@@ -1436,4 +1438,19 @@ h1, h2, h3, h4, h5, h6 {
     background: white;
     color: black;
   }
+}
+
+.terminal-copy {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.terminal-copy:hover {
+    color: #fff;
 }
