@@ -1377,6 +1377,158 @@
           });
         });
       </script>
+      <!-- ============================================
+           NEWSLETTER - listmonk subscription
+           ============================================ -->
+      <div class="newsletter-divider"></div>
+      <section class="newsletter-section" aria-labelledby="newsletter-title">
+        <div class="newsletter-inner">
+          <div class="newsletter-icon-wrap">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="url(#nl-grad)"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient
+                  id="nl-grad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#14b8a6" />
+                  <stop offset="100%" stop-color="#a855f7" />
+                </linearGradient>
+              </defs>
+              <rect x="2" y="4" width="20" height="16" rx="2" ry="2" />
+              <polyline points="2,4 12,13 22,4" />
+            </svg>
+          </div>
+
+          <span class="newsletter-label">Newsletter</span>
+          <h2 id="newsletter-title" class="newsletter-heading">
+            Bleiben Sie auf dem Laufenden
+          </h2>
+          <p class="newsletter-sub">
+            Updates zu neuen Funktionen, Installations-Tipps und Neuigkeiten
+            rund um OpenLibry – direkt in Ihr Postfach. Kein Spam, jederzeit
+            abbestellbar.
+          </p>
+
+          <form class="newsletter-form" id="newsletter-form" novalidate>
+            <input
+              type="email"
+              id="newsletter-email"
+              name="email"
+              class="newsletter-input"
+              placeholder="ihre@email.de"
+              aria-label="E-Mail-Adresse für Newsletter"
+              required
+              autocomplete="email"
+            />
+            <button type="submit" class="newsletter-btn" id="newsletter-submit">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+              Abonnieren
+            </button>
+          </form>
+
+          <p
+            class="newsletter-status"
+            id="newsletter-status"
+            role="status"
+            aria-live="polite"
+          ></p>
+
+          <p class="newsletter-privacy">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            DSGVO-konform &middot; Double Opt-in &middot;
+            <a
+              href="https://newsletter.openlibry.de"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Newsletter verwalten</a
+            >
+          </p>
+        </div>
+      </section>
+
+      <script>
+        (function () {
+          const form = document.getElementById("newsletter-form");
+          const emailEl = document.getElementById("newsletter-email");
+          const btn = document.getElementById("newsletter-submit");
+          const statusEl = document.getElementById("newsletter-status");
+
+          const LIST_UUID = "63b4fa78-cdc1-4883-8e95-1228b6175266";
+
+          form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const email = emailEl.value.trim();
+            if (!email) return;
+
+            btn.disabled = true;
+            btn.textContent = "Wird gesendet…";
+            statusEl.textContent = "";
+            statusEl.className = "newsletter-status";
+
+            try {
+              const res = await fetch(
+                "https://newsletter.openlibry.de/subscription/form",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                  },
+                  body: new URLSearchParams({
+                    email,
+                    name: "",
+                    l: LIST_UUID,
+                  }).toString(),
+                },
+              );
+              if (res.ok) {
+                statusEl.textContent =
+                  "✓ Bitte bestätigen Sie Ihre Anmeldung per E-Mail.";
+                statusEl.className = "newsletter-status success";
+                form.reset();
+              } else {
+                throw new Error();
+              }
+            } catch {
+              statusEl.innerHTML =
+                '✗ Direkte Anmeldung fehlgeschlagen. <a href="https://newsletter.openlibry.de/subscription/form" target="_blank" rel="noopener noreferrer">Hier klicken</a> zum Anmelden.';
+              statusEl.className = "newsletter-status error";
+            } finally {
+              btn.disabled = false;
+              btn.textContent = "Abonnieren";
+            }
+          });
+        })();
+      </script>
     </main>
 
     <!-- ============================================
