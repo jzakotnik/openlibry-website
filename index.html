@@ -1597,10 +1597,102 @@
         </div>
       </div>
     </footer>
+    <script>
+      (function () {
+        const overlay = document.getElementById("lightbox");
+        const img = document.getElementById("lightbox-img");
+        const closeBtn = document.getElementById("lightbox-close");
 
+        // Click any screenshot image to open lightbox
+        document
+          .querySelectorAll(".screenshot-item img")
+          .forEach(function (el) {
+            el.addEventListener("click", function () {
+              img.src = el.src;
+              img.alt = el.alt;
+              overlay.classList.add("active");
+              document.body.style.overflow = "hidden";
+            });
+          });
+
+        function closeLightbox() {
+          overlay.classList.remove("active");
+          document.body.style.overflow = "";
+          img.src = "";
+        }
+
+        closeBtn.addEventListener("click", closeLightbox);
+
+        // Click backdrop to close (but not the image itself)
+        overlay.addEventListener("click", function (e) {
+          if (e.target === overlay) closeLightbox();
+        });
+
+        // Escape key to close
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeLightbox();
+        });
+      })();
+    </script>
     <script src="js/main.js" defer></script>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script>
+      (function () {
+        // Create lightbox elements dynamically
+        const overlay = document.createElement("div");
+        overlay.id = "lightbox";
+        overlay.setAttribute("role", "dialog");
+        overlay.setAttribute("aria-modal", "true");
+        overlay.style.cssText =
+          "display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out;backdrop-filter:blur(4px);";
+
+        const closeBtn = document.createElement("button");
+        closeBtn.textContent = "×";
+        closeBtn.style.cssText =
+          "position:absolute;top:1.25rem;right:1.5rem;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1;opacity:0.8;";
+
+        const img = document.createElement("img");
+        img.style.cssText =
+          "max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,0.6);cursor:default;object-fit:contain;";
+
+        overlay.appendChild(closeBtn);
+        overlay.appendChild(img);
+        document.body.appendChild(overlay);
+
+        function openLightbox(src, alt) {
+          img.src = src;
+          img.alt = alt || "";
+          overlay.style.display = "flex";
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeLightbox() {
+          overlay.style.display = "none";
+          document.body.style.overflow = "";
+          img.src = "";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          document
+            .querySelectorAll(".screenshot-item img")
+            .forEach(function (el) {
+              el.style.cursor = "zoom-in";
+              el.addEventListener("click", function () {
+                openLightbox(el.src, el.alt);
+              });
+            });
+        });
+
+        closeBtn.addEventListener("click", closeLightbox);
+        overlay.addEventListener("click", function (e) {
+          if (e.target === overlay) closeLightbox();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeLightbox();
+        });
+      })();
     </script>
   </body>
 </html>

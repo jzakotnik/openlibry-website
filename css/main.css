@@ -1576,3 +1576,39 @@ h1, h2, h3, h4, h5, h6 {
   .newsletter-form { flex-direction: column; }
   .newsletter-btn  { justify-content: center; }
 }
+
+/* Lightbox */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  backdrop-filter: blur(4px);
+}
+.lightbox-overlay.active { display: flex; }
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  cursor: default;
+  object-fit: contain;
+}
+.lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.8;
+}
+.lightbox-close:hover { opacity: 1; }
+.screenshot-item img { cursor: zoom-in; }
