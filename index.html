@@ -1380,6 +1380,7 @@
       <!-- ============================================
            NEWSLETTER - listmonk subscription
            ============================================ -->
+      <!-- NEWSLETTER SECTION -->
       <div class="newsletter-divider"></div>
       <section class="newsletter-section" aria-labelledby="newsletter-title">
         <div class="newsletter-inner">
@@ -1420,17 +1421,76 @@
             abbestellbar.
           </p>
 
-          <form class="newsletter-form" id="newsletter-form" novalidate>
+          <form
+            class="newsletter-form"
+            id="newsletter-form"
+            novalidate
+            style="flex-wrap: wrap; gap: 0.75rem"
+          >
+            <!-- Honeypot -->
             <input
-              type="email"
-              id="newsletter-email"
-              name="email"
-              class="newsletter-input"
-              placeholder="ihre@email.de"
-              aria-label="E-Mail-Adresse für Newsletter"
-              required
-              autocomplete="email"
+              type="text"
+              name="ohnohoney"
+              style="
+                opacity: 0;
+                position: absolute;
+                top: 0;
+                height: 0;
+                width: 0;
+                pointer-events: none;
+              "
+              tabindex="-1"
+              autocomplete="off"
             />
+
+            <!-- Inputs stacked vertically, full width -->
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+              "
+            >
+              <input
+                type="email"
+                id="newsletter-email"
+                name="email"
+                class="newsletter-input"
+                style="
+                  width: 100%;
+                  height: 2.75rem;
+                  padding: 0.6rem 1rem;
+                  box-sizing: border-box;
+                "
+                placeholder="ihre@email.de"
+                aria-label="E-Mail-Adresse für Newsletter"
+                required
+                autocomplete="email"
+              />
+              <label
+                for="newsletter-captcha"
+                style="font-size: 0.85rem; opacity: 0.7; margin-top: 0.25rem"
+              >
+                📚 Was wächst Pinocchio, wenn er lügt?
+              </label>
+              <input
+                type="text"
+                id="newsletter-captcha"
+                name="captcha"
+                class="newsletter-input"
+                style="
+                  width: 100%;
+                  height: 2.75rem;
+                  padding: 0.6rem 1rem;
+                  box-sizing: border-box;
+                "
+                placeholder="Antwort eingeben"
+                autocomplete="off"
+                required
+              />
+            </div>
+
             <button type="submit" class="newsletter-btn" id="newsletter-submit">
               <svg
                 viewBox="0 0 24 24"
@@ -1470,12 +1530,48 @@
               href="https://newsletter.openlibry.de"
               target="_blank"
               rel="noopener noreferrer"
-              >Newsletter verwalten</a
             >
+              Newsletter verwalten
+            </a>
           </p>
         </div>
       </section>
 
+      <script>
+        (function () {
+          const VALID = ["nase", "die nase", "seine nase"];
+
+          document
+            .getElementById("newsletter-form")
+            .addEventListener("submit", function (e) {
+              const status = document.getElementById("newsletter-status");
+
+              // Honeypot check
+              if (this.querySelector('[name="ohnohoney"]').value !== "") {
+                e.preventDefault();
+                return;
+              }
+
+              // Pinocchio check
+              const answer = document
+                .getElementById("newsletter-captcha")
+                .value.trim()
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, ""); // strip accents
+
+              if (!VALID.includes(answer)) {
+                e.preventDefault();
+                status.textContent =
+                  "Hmm, das stimmt nicht ganz – was wächst Pinocchio, wenn er lügt? 🤥";
+                document.getElementById("newsletter-captcha").focus();
+                return;
+              }
+
+              status.textContent = "Einen Moment…";
+            });
+        })();
+      </script>
       <script>
         (function () {
           const form = document.getElementById("newsletter-form");

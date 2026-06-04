@@ -1572,6 +1572,19 @@ h1, h2, h3, h4, h5, h6 {
   height: 1px;
   background: linear-gradient(to right, transparent, rgba(148,163,184,0.12), transparent);
 }
+
+.newsletter-captcha {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.newsletter-captcha-label {
+  font-size: 0.9rem;
+  color: var(--color-text-muted, #6b7280);
+}
+
 @media (max-width: 520px) {
   .newsletter-form { flex-direction: column; }
   .newsletter-btn  { justify-content: center; }
