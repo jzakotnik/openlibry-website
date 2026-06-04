@@ -134,7 +134,7 @@
   </head>
   <body>
     <!-- ============================================
-         HEADER - See partials/_header.html
+         HEADER
          ============================================ -->
     <header class="header" role="banner">
       <div class="container">
@@ -267,7 +267,7 @@
 
     <main role="main">
       <!-- ============================================
-             HERO - See partials/_hero.html
+             HERO
              ============================================ -->
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-bg" aria-hidden="true">
@@ -280,7 +280,7 @@
             <div class="hero-text">
               <div class="hero-badge fade-in">
                 <span class="hero-badge-dot"></span>
-                <span>Open Source & DSGVO-konform</span>
+                <span>Open Source &amp; DSGVO-konform</span>
               </div>
 
               <h1 id="hero-title" class="hero-title fade-in fade-in-delay-1">
@@ -355,7 +355,6 @@
 
             <div class="hero-visual fade-in fade-in-delay-2">
               <div class="hero-mockup">
-                <!-- Reduced dimensions: ~50% of original 344x674 -->
                 <img
                   src="images/iphone-mockup.png"
                   alt="OpenLibry Benutzeroberfläche mit Buchverwaltung und Ausleiheübersicht"
@@ -370,7 +369,7 @@
       </section>
 
       <!-- ============================================
-             STATS - See partials/_stats.html
+             STATS
              ============================================ -->
       <section class="stats" aria-label="Statistiken">
         <div class="container">
@@ -381,7 +380,7 @@
             </div>
             <div class="stat-item fade-in fade-in-delay-1">
               <div class="stat-value">1 Klick</div>
-              <div class="stat-label">Ausleihe & Rückgabe</div>
+              <div class="stat-label">Ausleihe &amp; Rückgabe</div>
             </div>
             <div class="stat-item fade-in fade-in-delay-2">
               <div class="stat-value">1 Sek</div>
@@ -396,7 +395,7 @@
       </section>
 
       <!-- ============================================
-             FEATURES - See partials/_features.html
+             FEATURES
              ============================================ -->
       <section id="features" class="section" aria-labelledby="features-title">
         <div class="container">
@@ -503,7 +502,7 @@
                   <line x1="6" y1="20" x2="6" y2="14"></line>
                 </svg>
               </div>
-              <h3 class="feature-title">Reports & Statistiken</h3>
+              <h3 class="feature-title">Reports &amp; Statistiken</h3>
               <p class="feature-description">
                 Übersicht über ausgeliehene Bücher, Mahnungen und Statistiken.
                 Export als CSV.
@@ -560,7 +559,7 @@
       </section>
 
       <!-- ============================================
-             SCREENSHOTS - See partials/_screenshots.html
+             SCREENSHOTS
              ============================================ -->
       <section
         id="screenshots"
@@ -666,7 +665,7 @@
       </section>
 
       <!-- ============================================
-             VIDEOS - See partials/_videos.html
+             VIDEOS
              ============================================ -->
       <section class="video-features section" aria-labelledby="videos-title">
         <div class="container">
@@ -815,6 +814,7 @@
                 </p>
               </div>
             </article>
+
             <article class="video-card fade-in fade-in-delay-1">
               <div class="video-wrapper">
                 <video
@@ -845,7 +845,7 @@
       </section>
 
       <!-- ============================================
-             TESTIMONIALS - See partials/_testimonials.html
+             TESTIMONIALS
              ============================================ -->
       <section
         id="testimonials"
@@ -952,7 +952,7 @@
       </section>
 
       <!-- ============================================
-             INSTALLATION - See partials/_installation.html
+             INSTALLATION
              ============================================ -->
       <section
         id="installation"
@@ -991,16 +991,12 @@
                     stroke="#066d9e"
                     stroke-width="2"
                   />
-
-                  <!-- Container lid/top -->
                   <path
                     d="M8 24 L8 21 Q8 18 11 18 L53 18 Q56 18 56 21 L56 24"
                     fill="#29b6f6"
                     stroke="#066d9e"
                     stroke-width="2"
                   />
-
-                  <!-- Horizontal lines (container ridges) -->
                   <line
                     x1="8"
                     y1="30"
@@ -1028,8 +1024,6 @@
                     stroke-width="1.5"
                     opacity="0.6"
                   />
-
-                  <!-- Corner brackets (container locks) -->
                   <path
                     d="M12 22 L12 26 L16 26"
                     fill="none"
@@ -1058,8 +1052,6 @@
                     stroke-width="2"
                     stroke-linecap="round"
                   />
-
-                  <!-- Small cube/box inside to suggest contents -->
                   <rect
                     x="26"
                     y="32"
@@ -1251,11 +1243,8 @@
       </section>
 
       <!-- ============================================
-             CTA - See partials/_cta.html
+             CTA / CONTACT FORM
              ============================================ -->
-      <!-- Add to your <head>: <link rel="stylesheet" href="contact-form.css"> -->
-      <!-- Replace your existing CTA section with this -->
-
       <section class="cta" aria-labelledby="cta-title">
         <div class="container">
           <div class="cta-box">
@@ -1268,7 +1257,7 @@
               </p>
 
               <form class="cta-form" id="contact-form">
-                <!-- Honeypot field - hidden from humans, bots will fill it -->
+                <!-- Honeypot field -->
                 <input
                   type="text"
                   name="website"
@@ -1276,7 +1265,6 @@
                   tabindex="-1"
                   autocomplete="off"
                 />
-
                 <!-- Timestamp for time-based validation -->
                 <input type="hidden" name="timestamp" id="form-timestamp" />
 
@@ -1303,7 +1291,6 @@
                 </button>
               </form>
 
-              <!-- Success/Error messages -->
               <div id="form-success" class="form-message form-success" hidden>
                 ✓ Vielen Dank! Wir melden uns in Kürze bei Ihnen.
               </div>
@@ -1324,17 +1311,12 @@
           const successMsg = document.getElementById("form-success");
           const errorMsg = document.getElementById("form-error");
 
-          // Set timestamp when page loads (for bot detection)
           timestampField.value = Date.now();
 
           form.addEventListener("submit", async function (e) {
             e.preventDefault();
-
-            // Hide previous messages
             successMsg.hidden = true;
             errorMsg.hidden = true;
-
-            // Show loading state
             submitBtn.disabled = true;
             submitBtn.classList.add("btn-loading");
             const originalText = submitBtn.textContent;
@@ -1343,24 +1325,19 @@
             try {
               const formData = new FormData(form);
               const data = Object.fromEntries(formData.entries());
-
               const response = await fetch(
                 "https://mail.openlibry.de/api/contact",
                 {
                   method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
+                  headers: { "Content-Type": "application/json" },
                   body: JSON.stringify(data),
                 },
               );
-
               const result = await response.json();
-
               if (result.success) {
                 successMsg.hidden = false;
                 form.reset();
-                timestampField.value = Date.now(); // Reset timestamp for potential resubmission
+                timestampField.value = Date.now();
               } else {
                 errorMsg.textContent =
                   "✗ " + (result.error || "Ein Fehler ist aufgetreten.");
@@ -1377,10 +1354,10 @@
           });
         });
       </script>
+
       <!-- ============================================
            NEWSLETTER - listmonk subscription
            ============================================ -->
-      <!-- NEWSLETTER SECTION -->
       <div class="newsletter-divider"></div>
       <section class="newsletter-section" aria-labelledby="newsletter-title">
         <div class="newsletter-inner">
@@ -1427,7 +1404,7 @@
             novalidate
             style="flex-wrap: wrap; gap: 0.75rem"
           >
-            <!-- Honeypot -->
+            <!-- Honeypot — invisible to humans, bots fill it -->
             <input
               type="text"
               name="ohnohoney"
@@ -1537,90 +1514,93 @@
         </div>
       </section>
 
+      <!-- ============================================
+           NEWSLETTER SCRIPT — single unified handler
+           FIX: previously two separate event listeners meant the
+           second one posted to listmonk regardless of captcha result.
+           Now: e.preventDefault() fires first, captcha+honeypot are
+           checked, and the fetch only runs if both pass.
+           ============================================ -->
       <script>
         (function () {
-          const VALID = ["nase", "die nase", "seine nase"];
+          const VALID_ANSWERS = ["nase", "die nase", "seine nase"];
+          const LIST_UUID = "63b4fa78-cdc1-4883-8e95-1228b6175266";
+          const LISTMONK_URL =
+            "https://newsletter.openlibry.de/subscription/form";
 
-          document
-            .getElementById("newsletter-form")
-            .addEventListener("submit", function (e) {
-              const status = document.getElementById("newsletter-status");
-
-              // Honeypot check
-              if (this.querySelector('[name="ohnohoney"]').value !== "") {
-                e.preventDefault();
-                return;
-              }
-
-              // Pinocchio check
-              const answer = document
-                .getElementById("newsletter-captcha")
-                .value.trim()
-                .toLowerCase()
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, ""); // strip accents
-
-              if (!VALID.includes(answer)) {
-                e.preventDefault();
-                status.textContent =
-                  "Hmm, das stimmt nicht ganz – was wächst Pinocchio, wenn er lügt? 🤥";
-                document.getElementById("newsletter-captcha").focus();
-                return;
-              }
-
-              status.textContent = "Einen Moment…";
-            });
-        })();
-      </script>
-      <script>
-        (function () {
           const form = document.getElementById("newsletter-form");
           const emailEl = document.getElementById("newsletter-email");
+          const captchaEl = document.getElementById("newsletter-captcha");
           const btn = document.getElementById("newsletter-submit");
           const statusEl = document.getElementById("newsletter-status");
 
-          const LIST_UUID = "63b4fa78-cdc1-4883-8e95-1228b6175266";
+          // Store the button's inner HTML once so we can restore SVG + text after submit
+          const btnOriginalHTML = btn.innerHTML;
 
           form.addEventListener("submit", async function (e) {
+            // Always prevent default first — nothing submits unless we explicitly fetch
             e.preventDefault();
+
+            // 1. Honeypot check
+            if (form.querySelector('[name="ohnohoney"]').value !== "") {
+              return; // silently drop bot submissions
+            }
+
+            // 2. Pinocchio captcha check
+            const answer = captchaEl.value
+              .trim()
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, ""); // strip accents for robustness
+
+            if (!VALID_ANSWERS.includes(answer)) {
+              statusEl.textContent =
+                "Hmm, das stimmt nicht – was wächst Pinocchio, wenn er lügt? 🤥";
+              statusEl.className = "newsletter-status";
+              captchaEl.focus();
+              return;
+            }
+
+            // 3. Basic email sanity check
             const email = emailEl.value.trim();
             if (!email) return;
 
+            // 4. All checks passed — submit to listmonk
             btn.disabled = true;
             btn.textContent = "Wird gesendet…";
             statusEl.textContent = "";
             statusEl.className = "newsletter-status";
 
             try {
-              const res = await fetch(
-                "https://newsletter.openlibry.de/subscription/form",
-                {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                  },
-                  body: new URLSearchParams({
-                    email,
-                    name: "",
-                    l: LIST_UUID,
-                  }).toString(),
+              const res = await fetch(LISTMONK_URL, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
                 },
-              );
+                body: new URLSearchParams({
+                  email,
+                  name: "",
+                  l: LIST_UUID,
+                }).toString(),
+              });
+
               if (res.ok) {
                 statusEl.textContent =
                   "✓ Bitte bestätigen Sie Ihre Anmeldung per E-Mail.";
                 statusEl.className = "newsletter-status success";
                 form.reset();
               } else {
-                throw new Error();
+                throw new Error("Server error " + res.status);
               }
             } catch {
               statusEl.innerHTML =
-                '✗ Direkte Anmeldung fehlgeschlagen. <a href="https://newsletter.openlibry.de/subscription/form" target="_blank" rel="noopener noreferrer">Hier klicken</a> zum Anmelden.';
+                '✗ Anmeldung fehlgeschlagen. <a href="' +
+                LISTMONK_URL +
+                '" target="_blank" rel="noopener noreferrer">Hier klicken</a> zum direkten Anmelden.';
               statusEl.className = "newsletter-status error";
             } finally {
               btn.disabled = false;
-              btn.textContent = "Abonnieren";
+              btn.innerHTML = btnOriginalHTML; // restore SVG icon + text
             }
           });
         })();
@@ -1628,7 +1608,7 @@
     </main>
 
     <!-- ============================================
-         FOOTER - See partials/_footer.html
+         FOOTER
          ============================================ -->
     <footer class="footer" role="contentinfo">
       <div class="container">
@@ -1687,56 +1667,20 @@
           </div>
 
           <p class="footer-copyright">
-            © <span id="year">2024</span> OpenLibry. Open Source unter
+            &copy; <span id="year">2024</span> OpenLibry. Open Source unter
             MIT-Lizenz.
           </p>
         </div>
       </div>
     </footer>
-    <script>
-      (function () {
-        const overlay = document.getElementById("lightbox");
-        const img = document.getElementById("lightbox-img");
-        const closeBtn = document.getElementById("lightbox-close");
 
-        // Click any screenshot image to open lightbox
-        document
-          .querySelectorAll(".screenshot-item img")
-          .forEach(function (el) {
-            el.addEventListener("click", function () {
-              img.src = el.src;
-              img.alt = el.alt;
-              overlay.classList.add("active");
-              document.body.style.overflow = "hidden";
-            });
-          });
-
-        function closeLightbox() {
-          overlay.classList.remove("active");
-          document.body.style.overflow = "";
-          img.src = "";
-        }
-
-        closeBtn.addEventListener("click", closeLightbox);
-
-        // Click backdrop to close (but not the image itself)
-        overlay.addEventListener("click", function (e) {
-          if (e.target === overlay) closeLightbox();
-        });
-
-        // Escape key to close
-        document.addEventListener("keydown", function (e) {
-          if (e.key === "Escape") closeLightbox();
-        });
-      })();
-    </script>
-    <script src="js/main.js" defer></script>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
+
+    <!-- Lightbox (dynamically created) -->
     <script>
       (function () {
-        // Create lightbox elements dynamically
         const overlay = document.createElement("div");
         overlay.id = "lightbox";
         overlay.setAttribute("role", "dialog");
@@ -1790,5 +1734,7 @@
         });
       })();
     </script>
+
+    <script src="js/main.js" defer></script>
   </body>
 </html>
