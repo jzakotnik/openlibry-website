@@ -1590,6 +1590,26 @@ h1, h2, h3, h4, h5, h6 {
   .newsletter-btn  { justify-content: center; }
 }
 
+/* ── Community Section (Discord) ──────────────────────── */
+.community-section::before {
+  background:
+    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(88,101,242,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 70% at 80% 50%, rgba(88,101,242,0.08) 0%, transparent 60%);
+}
+.community-icon-wrap {
+  background: linear-gradient(135deg, rgba(88,101,242,0.2), rgba(88,101,242,0.08));
+  border: 1px solid rgba(88,101,242,0.35);
+  color: #5865f2;
+}
+.community-label { color: #5865f2; }
+.community-btn {
+  background: #5865f2;
+  margin: 0 auto 14px;
+  text-decoration: none;
+  justify-content: center;
+}
+.community-btn:hover { background: #4752c4; opacity: 1; }
+
 /* Lightbox */
 .lightbox-overlay {
   display: none;
