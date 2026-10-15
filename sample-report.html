@@ -1,0 +1,701 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Bibliothek in Zahlen</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Auswertung der Schulbibliothek: Ausleihen, Rückgaben, Bestand und Leserschaft von Dezember 2023 bis Oktober 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Courier+Prime:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Konzept: eine Leihkarte aus dem Karteikasten als Titelblatt, darunter ruhige Auswertungs-Tafeln.
+   Subjekt: Schulbibliothek mit Freitags-Ausleihe. Stempelviolett als einzige Hauptfarbe, Orange nur als zweite Datenreihe. */
+:root{
+  --paper:#F3F2F8; --card:#FDFCFF; --ink:#1B1730; --ink2:#55516B; --ink3:#6F6B86;
+  --line:#E2DFEC; --line2:#CFCBE0;
+  --acc:#6250d6; --acc-ink:#4A3AA7; --acc-wash:#6250d61a;
+  --warm:#eb6834; --warm-ink:#B3441A; --crit:#D03B3B; --crit-wash:#d03b3b18;
+  --rule:#CFE0F3; --margin:#E8A3A0; --stamp:#4A3AA7; --nav:#fdfcffe6;
+  --f-d:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --f-b:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-m:"Courier Prime","Courier New",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#121018; --card:#1B1A22; --ink:#EFEDF7; --ink2:#BFBBD2; --ink3:#9A96AF;
+    --line:#2C2A38; --line2:#3E3B50;
+    --acc:#9085e9; --acc-ink:#B9B1F7; --acc-wash:#9085e92b;
+    --warm:#d95926; --warm-ink:#F0916A; --crit:#E66767; --crit-wash:#e6676722;
+    --rule:#262F48; --margin:#7d3d44; --stamp:#B9B1F7; --nav:#1b1a22e6;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121018; --card:#1B1A22; --ink:#EFEDF7; --ink2:#BFBBD2; --ink3:#9A96AF;
+  --line:#2C2A38; --line2:#3E3B50;
+  --acc:#9085e9; --acc-ink:#B9B1F7; --acc-wash:#9085e92b;
+  --warm:#d95926; --warm-ink:#F0916A; --crit:#E66767; --crit-wash:#e6676722;
+  --rule:#262F48; --margin:#7d3d44; --stamp:#B9B1F7; --nav:#1b1a22e6;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-b);font-size:17px;line-height:1.55;
+  padding-block:0 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-d);font-weight:700;letter-spacing:-.02em;text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-m)}
+.eyebrow{font-family:var(--f-m);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc-ink);font-weight:700}
+small{font-size:.8em}
+
+/* Navigation */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px))) 0 calc(-1*max(16px,env(safe-area-inset-right,0px)));
+  background:var(--nav);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1120px;margin:0 auto;display:flex;gap:6px;align-items:center;overflow-x:auto;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.nav b{font-family:var(--f-d);font-size:16px;margin-right:10px;white-space:nowrap}
+.nav a{font-family:var(--f-m);font-size:13px;color:var(--ink2);text-decoration:none;padding:5px 10px;border-radius:999px;white-space:nowrap}
+.nav a:hover,.nav a:focus-visible{background:var(--acc-wash);color:var(--acc-ink);outline:none}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center;padding:64px 0 40px}
+.hero h1{font-size:clamp(46px,7.4vw,92px);line-height:.95;font-weight:800;margin:16px 0 22px}
+.hero .lead{font-size:20px;color:var(--ink2);max-width:34ch}
+.hero .meta{margin-top:22px;font-family:var(--f-m);font-size:13px;color:var(--ink3);line-height:1.7}
+.slip{position:relative;background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:26px 28px 26px 84px;
+  background-image:repeating-linear-gradient(to bottom,transparent 0 31px,var(--rule) 31px 32px);background-position:0 18px;
+  box-shadow:0 1px 0 var(--line),0 18px 40px -22px rgba(40,30,90,.35);transform:rotate(-1.2deg)}
+.slip::before{content:"";position:absolute;left:62px;top:0;bottom:0;width:2px;background:var(--margin)}
+.slip .lab{font-family:var(--f-m);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);line-height:32px}
+.slip .big{font-family:var(--f-d);font-weight:800;font-size:clamp(76px,13vw,132px);line-height:.95;letter-spacing:-.04em;color:var(--ink);margin:12px 0 14px}
+.slip .sub{font-size:18px;line-height:32px;color:var(--ink2)}
+.stamp{position:absolute;right:18px;top:-22px;transform:rotate(7deg);border:3px double var(--stamp);color:var(--stamp);border-radius:8px;padding:6px 12px;
+  font-family:var(--f-m);font-weight:700;text-align:center;line-height:1.15;background:var(--card);opacity:.96}
+.stamp span{display:block;font-size:11px;letter-spacing:.16em}
+.stamp b{display:block;font-size:20px;letter-spacing:.04em}
+
+/* Kennzahlen */
+.ledger{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));border-top:2px solid var(--ink);border-bottom:1px solid var(--line2);margin-top:12px}
+.ledger>div{padding:18px 18px 16px;border-left:1px solid var(--line)}
+.ledger>div:first-child{border-left:0;padding-left:0}
+.ledger .k{font-family:var(--f-m);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.ledger .v{font-family:var(--f-d);font-weight:700;font-size:40px;line-height:1.1;letter-spacing:-.03em;margin-top:6px}
+.ledger .v small{font-family:var(--f-b);font-weight:600;font-size:15px;letter-spacing:0;color:var(--ink2);margin-left:4px}
+.ledger .n{font-size:14px;color:var(--ink2);margin-top:2px}
+
+/* Abschnitte */
+.sec{margin-top:92px;scroll-margin-top:64px}
+.sec>.eyebrow{display:block;margin-bottom:12px}
+.sec h2{font-size:clamp(30px,4.6vw,50px);line-height:1.04;max-width:24ch}
+.sec .intro{margin-top:16px;max-width:62ch;color:var(--ink2);font-size:18px}
+.sec .intro b,.note b,.card b{color:var(--ink)}
+.stack{display:grid;gap:20px;margin-top:34px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;min-width:0}
+.card h3{font-size:21px;line-height:1.2;margin-bottom:4px}
+.card .cap{font-size:15px;color:var(--ink2);margin-bottom:16px;max-width:60ch}
+.note{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:15px;color:var(--ink2)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--ink2);margin-bottom:8px}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{display:inline-block;width:18px;height:0;border-top:3px solid var(--acc);border-radius:2px}
+.legend i.w{border-top-color:var(--warm)}
+.legend i.sq{width:11px;height:11px;border:0;border-radius:2px;background:var(--acc)}
+
+/* Befunde */
+.finds{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:0;border-top:1px solid var(--line2)}
+.finds li{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:6px 28px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.finds .fk{font-family:var(--f-d);font-weight:700;font-size:30px;letter-spacing:-.03em;line-height:1.05;color:var(--acc-ink)}
+.finds .fk small{display:block;font-family:var(--f-m);font-weight:400;font-size:12px;letter-spacing:.06em;color:var(--ink2);margin-top:4px;text-transform:uppercase}
+.finds p{font-size:18px;max-width:64ch}
+.finds p b{font-weight:700}
+
+/* Diagramme */
+.chart{position:relative;width:100%}
+.chart svg{display:block;overflow:visible;max-width:100%}
+.chart text{font-family:var(--f-b);font-size:12.5px;fill:var(--ink3)}
+.chart .gl{stroke:var(--line);stroke-width:1;shape-rendering:crispEdges}
+.chart .bl0{stroke:var(--line2);stroke-width:1}
+.chart .sy{stroke:var(--line2);stroke-width:1}
+.chart .sylab{fill:var(--ink2);font-family:var(--f-m);font-size:11.5px;letter-spacing:.04em}
+.chart .ln{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.chart .ln.r{stroke:var(--acc)} .chart .ln.t{stroke:var(--warm)}
+.chart .dot{stroke:var(--card);stroke-width:2}
+.chart .dot.r{fill:var(--acc)} .chart .dot.t{fill:var(--warm)}
+.chart .area{fill:var(--acc);opacity:.1}
+.chart .cross{stroke:var(--ink3);stroke-width:1}
+.chart .ann{fill:var(--ink);font-weight:700;font-size:13px}
+.chart:focus-visible{outline:2px solid var(--acc);outline-offset:4px;border-radius:6px}
+
+.brow{display:grid;grid-template-columns:1fr auto;gap:5px 14px;padding:10px 6px 11px;border-bottom:1px solid var(--line);border-radius:6px;outline:none}
+.brow:last-child{border-bottom:0}
+.brow:hover,.brow:focus-visible{background:var(--acc-wash)}
+.brow .bl{display:flex;align-items:baseline;gap:10px;min-width:0;flex-wrap:wrap}
+.brow .rk{font-family:var(--f-m);font-size:13px;color:var(--ink3);width:22px;flex:none;text-align:right}
+.brow .bt{font-weight:600;line-height:1.25;overflow-wrap:anywhere}
+.brow .bs{font-size:14px;color:var(--ink2)}
+.brow .bv{font-family:var(--f-d);font-weight:700;font-size:20px;letter-spacing:-.02em;white-space:nowrap}
+.brow .bv small{font-family:var(--f-b);font-weight:400;font-size:13px;color:var(--ink2);margin-left:4px;letter-spacing:0}
+.bar{grid-column:1/-1;height:12px;background:var(--acc-wash);border-radius:2px 6px 6px 2px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);border-radius:0 4px 4px 0}
+
+.cols{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;align-items:stretch}
+.col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;outline:none}
+.col .v{font-family:var(--f-d);font-weight:700;font-size:17px;letter-spacing:-.02em;margin-bottom:6px}
+.col .b{width:min(24px,60%);background:var(--acc);border-radius:4px 4px 0 0;min-height:2px;transition:filter .15s}
+.col:hover .b,.col:focus-visible .b{filter:brightness(1.18)}
+.col .base{width:100%;height:1px;background:var(--line2)}
+.col .l{font-size:12.5px;color:var(--ink2);text-align:center;margin-top:8px;line-height:1.25;min-height:48px}
+
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tab,.chip{font:600 14px/1 var(--f-b);color:var(--ink);background:transparent;border:1px solid var(--line2);border-radius:999px;padding:9px 15px;cursor:pointer}
+.tab:hover,.chip:hover{border-color:var(--acc)}
+.tab[aria-selected="true"],.chip[aria-pressed="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.tab:focus-visible,.chip:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+.heatwrap{overflow-x:auto;padding-bottom:6px}
+.heat{display:grid;grid-template-columns:78px repeat(12,minmax(40px,1fr));gap:3px;min-width:600px}
+.heat .hh{font-family:var(--f-m);font-size:12px;color:var(--ink2);text-align:center;padding-bottom:4px}
+.heat .hr{font-family:var(--f-m);font-size:12px;color:var(--ink);display:flex;align-items:center;font-weight:700}
+.heat .hc{height:44px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;outline:none}
+.heat .hc.na{background:repeating-linear-gradient(45deg,transparent 0 5px,var(--line) 5px 6px);color:transparent}
+.heat .hc.pk{box-shadow:inset 0 0 0 2px var(--ink)}
+.heat .hc:not(.na):hover,.heat .hc:not(.na):focus-visible{box-shadow:inset 0 0 0 2px var(--ink)}
+.hleg{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:13px;color:var(--ink2);font-family:var(--f-m)}
+.hleg i{display:block;width:140px;height:10px;border-radius:5px;background:linear-gradient(90deg,color-mix(in srgb,var(--acc) 6%,var(--card)),color-mix(in srgb,var(--acc) 60%,var(--card)))}
+.hleg em{display:inline-block;width:22px;height:10px;border-radius:3px;background:repeating-linear-gradient(45deg,transparent 0 3px,var(--line2) 3px 4px);border:1px solid var(--line);margin-left:14px;vertical-align:middle}
+
+.stackbar{display:flex;gap:2px;height:22px}
+.stackbar i{display:block;height:100%;border-radius:3px;min-width:4px}
+.sleg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px 18px;margin-top:16px}
+.sleg div{font-size:14px;color:var(--ink2);line-height:1.3}
+.sleg b{display:block;font-family:var(--f-d);font-size:24px;color:var(--ink);letter-spacing:-.02em}
+.sleg .sw{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+
+.big2{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:6px}
+.big2 div{border-top:2px solid var(--ink);padding-top:10px}
+.big2 b{display:block;font-family:var(--f-d);font-size:38px;line-height:1.05;letter-spacing:-.03em}
+.big2 span{font-size:14px;color:var(--ink2);display:block;margin-top:3px}
+
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--crit);background:var(--crit-wash);border-radius:999px;padding:3px 10px 3px 8px}
+.badge svg{width:14px;height:14px}
+
+.gap{margin-top:14px}
+.gap h4{margin:0 0 8px;font-family:var(--f-b);font-size:15px;font-weight:700}
+.gap h4 span{font-weight:400;color:var(--ink2)}
+.vols{display:flex;flex-wrap:wrap;gap:4px}
+.vols i{font-style:normal;font-family:var(--f-m);font-size:12px;min-width:28px;height:26px;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;background:var(--acc-wash);color:var(--ink);font-variant-numeric:tabular-nums}
+.vols i.m{background:var(--crit-wash);color:var(--crit);font-weight:700;box-shadow:inset 0 0 0 1.5px var(--crit)}
+
+.mini{width:100%;border-collapse:collapse;font-size:14.5px}
+.mini td{padding:7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.mini td:last-child{text-align:right;font-weight:700;white-space:nowrap;padding-left:12px}
+.mini tr:last-child td{border-bottom:0}
+details{margin-top:14px;font-size:14px;color:var(--ink2)}
+details summary{cursor:pointer;font-weight:600;color:var(--acc-ink)}
+.tblwrap{max-height:280px;overflow:auto;margin-top:10px;border:1px solid var(--line);border-radius:8px}
+.tblwrap table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.tblwrap th,.tblwrap td{padding:6px 12px;text-align:right;border-bottom:1px solid var(--line)}
+.tblwrap th:first-child,.tblwrap td:first-child{text-align:left}
+.tblwrap th{position:sticky;top:0;background:var(--card);font-weight:700;color:var(--ink)}
+
+/* Ideen */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 20px}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.idea{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.idea .tag{font-family:var(--f-m);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--acc-ink)}
+.idea .tag.new{color:var(--warm-ink)}
+.idea h3{font-size:20px;line-height:1.2}
+.idea p{font-size:15.5px;color:var(--ink2)}
+.idea .teaser{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink)}
+.idea .teaser b{font-family:var(--f-d);font-size:19px;letter-spacing:-.02em;color:var(--acc-ink)}
+.idea.hide{display:none}
+
+footer{margin-top:90px;padding-top:26px;border-top:2px solid var(--ink);display:grid;grid-template-columns:1fr 1fr;gap:28px;font-size:14.5px;color:var(--ink2)}
+footer h3{font-family:var(--f-m);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+footer ul{margin:0;padding-left:18px;display:grid;gap:5px}
+
+#tip{position:fixed;left:0;top:0;z-index:60;pointer-events:none;background:var(--ink);color:var(--card);border-radius:9px;padding:9px 12px;font-size:13.5px;max-width:270px;box-shadow:0 10px 30px -10px rgba(0,0,0,.45)}
+#tip .tt{font-weight:700;margin-bottom:4px;line-height:1.25}
+#tip .tr{display:flex;align-items:center;gap:8px;line-height:1.5}
+#tip .tr b{font-family:var(--f-d);font-size:15px}
+#tip .tr span{opacity:.82}
+#tip .tk{display:inline-block;width:14px;height:3px;border-radius:2px;flex:none}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:34px;padding-top:40px}
+  .g2,.g3,footer{grid-template-columns:1fr}
+  .finds li{grid-template-columns:1fr;gap:4px}
+  .sec{margin-top:70px}
+  .slip{padding-left:68px;padding-right:20px}
+  .slip::before{left:48px}
+  .card{padding:18px 16px}
+  .ledger>div:nth-child(odd){border-left:0;padding-left:0}
+}
+</style>
+
+<div id="tip" hidden></div>
+<div class="wrap">
+<nav class="nav" aria-label="Abschnitte"><div class="nav-in">
+  <b>Bibliothek in Zahlen</b>
+  <a href="#befunde">Befunde</a><a href="#verlauf">Verlauf</a><a href="#rhythmus">Rhythmus</a><a href="#medien">Medien</a><a href="#rueckgabe">Rückgabe</a><a href="#bestand">Bestand</a><a href="#leser">Leser</a><a href="#ideen">Ideen</a>
+</div></nav>
+
+<header class="hero">
+  <div>
+    <span class="eyebrow">Schulbibliothek · Auswertung</span>
+    <h1>Bibliothek in Zahlen</h1>
+    <p class="lead">Ausleihen, Rückgaben und Bestand aus dem Ausleihprotokoll. Mit Befunden und Ideen für die Bibliotheksarbeit.</p>
+    <p class="meta">Zeitraum: 22.12.2023 bis 02.10.2026 (letzte Ausleihe)<br>Datenstand: 13.10.2026 · Bericht vom 15.10.2026<br>Alle Angaben anonym, ohne Namen</p>
+  </div>
+  <div class="slip" role="group" aria-label="Ausleihen insgesamt">
+    <div class="stamp"><span>Letzte Ausleihe</span><b>02.10.2026</b></div>
+    <div class="lab">Ausleihen insgesamt</div>
+    <div class="big">3.156</div>
+    <div class="sub">an 88 Freitagen, im Schnitt 36 pro Ausleihtag</div>
+  </div>
+</header>
+
+<div class="ledger" role="list">
+  <div role="listitem"><div class="k">Medien im Bestand</div><div class="v">1.552</div><div class="n">2,03 Ausleihen je Medium</div></div>
+  <div role="listitem"><div class="k">Leserkonten</div><div class="v">75</div><div class="n">67 davon seit 1. August aktiv</div></div>
+  <div role="listitem"><div class="k">Aktuell verliehen</div><div class="v">92</div><div class="n">45 davon überfällig</div></div>
+  <div role="listitem"><div class="k">Mittlere Leihdauer</div><div class="v">14<small>Tage</small></div><div class="n">Median über 3.064 Leihen</div></div>
+  <div role="listitem"><div class="k">Nie ausgeliehen</div><div class="v">44<small>%</small></div><div class="n">688 Medien seit Dez. 2023</div></div>
+</div>
+
+<section class="sec" id="befunde">
+  <span class="eyebrow">Befunde</span>
+  <h2>Fünf Dinge, die auffallen</h2>
+  <ul class="finds">
+    <li><div class="fk">+47 %<small>Schuljahresstart</small></div><p>Das Schuljahr 2026/27 beginnt so stark wie keines der Vorjahre: <b>264 Ausleihen</b> zwischen 1. August und 15. Oktober, im Vorjahreszeitraum waren es 180 (2024: 225).</p></li>
+    <li><div class="fk">Freitag<small>Ausleihtag</small></div><p>Die Bibliothek läuft am Freitag: <b>alle Ausleihen</b> und 99,8 % der Rückgaben fallen auf diesen Tag, 78 % der Ausleihen zwischen 9 und 11 Uhr.</p></li>
+    <li><div class="fk">209×<small>Gregs Tagebuch</small></div><p>Reihen tragen die Nachfrage: Gregs Tagebuch (209 Ausleihen), Minecraft (202) und Was ist was (107). <b>Alle zehn meistausgeliehenen Titel</b> sind Einzelexemplare.</p></li>
+    <li><div class="fk">44 %<small>nie ausgeliehen</small></div><p><b>688 von 1.552 Medien</b> wurden seit Dezember 2023 kein einziges Mal ausgeliehen. In den letzten zwölf Monaten blieben 68 % des Bestands liegen.</p></li>
+    <li><div class="fk">45 von 92<small>überfällig</small></div><p>Knapp die Hälfte der aktuell verliehenen Medien ist überfällig. <b>3 Medien</b> sind seit dem 19.06.2026 unterwegs.</p></li>
+  </ul>
+</section>
+
+<section class="sec" id="verlauf">
+  <span class="eyebrow">Verlauf</span>
+  <h2>Nach den Ferien zieht die Ausleihe an</h2>
+  <p class="intro">Jeden Herbst springen die Ausleihen nach der Sommerpause hoch. Im Juli 2025 gab es nur 9 Ausleihen, im Juli 2026 keine. Der stärkste Monat war der Februar 2025 mit 205 Ausleihen.</p>
+  <div class="stack">
+    <div class="card">
+      <h3>Ausleihen und Rückgaben pro Monat</h3>
+      <p class="cap">Fahren Sie mit der Maus über das Diagramm oder nutzen Sie die Pfeiltasten, um einzelne Monate zu lesen.</p>
+      <div class="legend"><span><i></i>Ausleihen</span><span><i class="w"></i>Rückgaben</span></div>
+      <div class="chart" id="lineChart" tabindex="0" aria-label="Liniendiagramm der monatlichen Ausleihen und Rückgaben"></div>
+      <details><summary>Tabelle anzeigen</summary><div class="tblwrap"><table id="monthTable"></table></div></details>
+    </div>
+    <div class="g2">
+      <div class="card">
+        <h3>Ausleihen je Schuljahr</h3>
+        <p class="cap">2023/24 zählt erst ab Dezember 2023, 2026/27 nur bis Mitte Oktober. Das Schuljahr 2025/26 lag 23 % unter 2024/25.</p>
+        <div id="sjBars"></div>
+      </div>
+      <div class="card">
+        <h3>Schuljahresstart im Vergleich</h3>
+        <p class="cap">Ausleihen vom 1. August bis 15. Oktober des jeweiligen Jahres.</p>
+        <div id="startBars"></div>
+        <p class="note">2026 liegt <b>47 % über</b> dem Vorjahreswert. Die ersten Wochen nach dem Sommer bringen die meisten Ausleihen.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Jahresrhythmus nach Schuljahr und Monat</h3>
+      <p class="cap">Je dunkler das Feld, desto mehr Ausleihen. Die Spitzen liegen im Herbst und im Februar, Juni und Juli sind ruhig.</p>
+      <div class="heatwrap"><div class="heat" id="heat"></div></div>
+      <div class="hleg"><span>wenig</span><i></i><span>viel</span><em></em><span>keine Daten</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="rhythmus">
+  <span class="eyebrow">Rhythmus</span>
+  <h2>Die Bibliothek ist ein Freitag</h2>
+  <p class="intro">Alle 3.156 Ausleihen stammen von 88 verschiedenen Freitagen. Der Betrieb konzentriert sich auf zwei Vormittagsstunden: Zwischen 9 und 11 Uhr entstehen 78 % aller Ausleihen.</p>
+  <div class="stack">
+    <div class="g2">
+      <div class="card"><h3>Ausleihen nach Uhrzeit</h3><p class="cap">Anzahl aller Ausleihen je Stunde, in Ortszeit.</p><div id="hourBars"></div></div>
+      <div class="card"><h3>Die stärksten Ausleihtage</h3><p class="cap">Fünf Freitage mit den meisten Ausleihen.</p><div id="dayBars"></div>
+        <p class="note">Im Schnitt werden pro Ausleihtag 36 Medien ausgeliehen. Die Spitzentage erreichen 56 bis 63 Ausleihen.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="medien">
+  <span class="eyebrow">Medien</span>
+  <h2>Reihen und Comics halten die Ausleihe am Laufen</h2>
+  <p class="intro">Was gelesen wird, ist sehr konzentriert: Eine Handvoll Reihen und Themen bringt einen großen Teil der Ausleihen. Pro Medium gerechnet sind Computerspiele und Minecraft die Spitzenreiter.</p>
+  <div class="stack">
+    <div class="card">
+      <div class="tabs" role="tablist" aria-label="Auswertung wählen" id="medTabs"></div>
+      <p class="cap" id="medCap"></p>
+      <div id="medList"></div>
+    </div>
+    <div class="g2">
+      <div class="card">
+        <h3>Nachkauf-Signal</h3>
+        <p class="cap">Alle zehn meistausgeliehenen Titel gibt es nur einmal im Bestand.</p>
+        <p>Der Spitzenreiter <b>Dog Man, Bd. 2</b> wurde 24-mal ausgeliehen, Platz zwei bis vier liegen bei 21 und 20. Ein Zweitexemplar könnte Wartezeiten verkürzen.</p>
+        <p class="cap" style="margin:18px 0 6px">Reihen mit der höchsten Nachfrage je Titel</p>
+        <div id="perTitle"></div>
+      </div>
+      <div class="card">
+        <h3>Fehlende Bände in Reihen</h3>
+        <p class="cap">Innerhalb der vorhandenen Nummern fehlen oder gelten als verloren:</p>
+        <div id="gaps"></div>
+        <div class="legend" style="margin-top:12px"><span><i class="sq" style="opacity:.35"></i>vorhanden</span><span><i class="sq" style="background:var(--crit)"></i>fehlt oder verloren</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="rueckgabe">
+  <span class="eyebrow">Rückgabe</span>
+  <h2>Die Hälfte kommt nach zwei Wochen zurück</h2>
+  <p class="intro">Die mittlere Leihdauer liegt bei 14 Tagen. 59 % der Leihen enden innerhalb von drei Wochen, 31 % dauern länger als vier Wochen.</p>
+  <div class="stack">
+    <div class="g2">
+      <div class="card"><h3>Wie lange Medien draußen bleiben</h3><p class="cap">3.064 abgeschlossene Leihen, Ausleihe bis Rückgabe. Wo. = Wochen.</p><div id="durCols"></div>
+        <p class="note">Seit dem 17.04.2026 erfasst das Protokoll Verlängerungen: <b>206</b> bei 121 verschiedenen Medien.</p></div>
+      <div class="card"><h3>Aktuell verliehen: 92 Medien</h3><p class="cap">Stand 15.10.2026, gemessen am eingetragenen Rückgabedatum.</p><div id="curCols"></div>
+        <p class="note"><span class="badge"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5 15 14H1L8 1.5Zm-.75 5v3.5h1.5V6.5h-1.5Zm0 4.7v1.4h1.5v-1.4h-1.5Z" fill="currentColor"/></svg>45 überfällig</span> &nbsp; Drei Medien sind seit dem 19.06.2026 verliehen, also schon über 100 Tage.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="bestand">
+  <span class="eyebrow">Bestand</span>
+  <h2>Fast jedes zweite Medium blieb unberührt</h2>
+  <p class="intro">688 der 1.552 Medien wurden seit Dezember 2023 nie ausgeliehen. Neuere Anschaffungen schneiden deutlich besser ab als der Erstbestand.</p>
+  <div class="stack">
+    <div class="card">
+      <h3>Zustand des Bestands</h3>
+      <p class="cap">Ausleihstatus aller 1.552 Medien heute.</p>
+      <div class="stackbar" id="statusBar" role="img" aria-label="Verteilung des Bestands nach Status"></div>
+      <div class="sleg" id="statusLeg"></div>
+      <div class="big2" style="margin-top:26px">
+        <div><b>688</b><span>nie ausgeliehen (44 %)</span></div>
+        <div><b>1.056</b><span>in 12 Monaten nicht ausgeliehen (68 %)</span></div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="card"><h3>Wie viele wurden schon einmal ausgeliehen?</h3><p class="cap">Anteil je Anschaffungsjahr, in Prozent.</p><div id="cohEver"></div></div>
+      <div class="card"><h3>Ausleihen pro Medium</h3><p class="cap">Neuere Zugänge hatten weniger Zeit, 2026 läuft noch.</p><div id="cohPer"></div></div>
+    </div>
+    <div class="card">
+      <h3>Verlorene Medien mit Nachfrage</h3>
+      <p class="cap">Von den 15 als verloren markierten Medien waren einige gefragt. Sie sind Kandidaten für eine Ersatzbeschaffung.</p>
+      <table class="mini" id="lostTable"></table>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="leser">
+  <span class="eyebrow">Leser</span>
+  <h2>Viele Kinder lesen mit, nicht nur wenige Vielleser</h2>
+  <p class="intro">Seit Dezember 2023 haben 133 Konten ausgeliehen, 73 davon gibt es heute noch im System. Die aktivsten zehn Prozent verursachen 27,5 % der Ausleihen, das ist eine breite Verteilung.</p>
+  <div class="stack">
+    <div class="g2">
+      <div class="card"><h3>Ausleihen pro Konto seit Schuljahresbeginn</h3><p class="cap">Durchschnitt je Klassenstufe seit 1. August 2026. Konten ohne Klassenstufe sind nicht enthalten.</p><div id="gradeCols"></div>
+        <p class="note">Klasse 4 liegt aktuell am niedrigsten, <b>5 von 26 Konten</b> haben seit August noch nichts ausgeliehen.</p></div>
+      <div class="card"><h3>Wie oft haben Konten ausgeliehen?</h3><p class="cap">Anzahl der Konten (Säulen) nach Zahl ihrer Ausleihen (Beschriftung) seit Dezember 2023. Median: 20 Ausleihen.</p><div id="readerCols"></div>
+        <p class="note">3 aktuelle Konten haben in den letzten zwölf Monaten gar nichts ausgeliehen.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="ideen">
+  <span class="eyebrow">Ideen</span>
+  <h2>Was für die Bibliothek noch interessant sein könnte</h2>
+  <p class="intro">Vorschläge für weitere Auswertungen und Aktionen. „Sofort möglich“ heißt, dass die Daten dafür bereits vorhanden sind. „Braucht neue Daten“ setzt voraus, dass etwas zusätzlich erfasst wird.</p>
+  <div class="filters" role="group" aria-label="Ideen filtern" id="ideaFilters"></div>
+  <div class="ideas" id="ideaGrid"></div>
+</section>
+
+<footer>
+  <div>
+    <h3>So wurde gezählt</h3>
+    <ul>
+      <li>Quelle: Ausleihprotokoll (Audit) und Medien- und Kontentabellen der Bibliothekssoftware.</li>
+      <li>Ein Schuljahr läuft vom 1. August bis 31. Juli, Zeiten in deutscher Ortszeit.</li>
+      <li>Reihen leiten sich aus dem Titelanfang ab, Themen aus den Schlagwörtern. Ein Medium kann mehrere Themen haben.</li>
+      <li>Leihdauer: jede Ausleihe wird mit der nächsten Rückgabe desselben Mediums verbunden.</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Grenzen der Daten</h3>
+    <ul>
+      <li>Das Protokoll beginnt am 17.12.2023, frühere Ausleihen fehlen.</li>
+      <li>114 Rückgaben haben keine passende Ausleihe im Protokoll, 36 Ausleihen betreffen inzwischen gelöschte Medien.</li>
+      <li>Bei allen 1.552 Medien ist kein Regalstandort eingetragen, 56 haben keine Altersangabe, 24 kein Schlagwort.</li>
+      <li>Der Bericht enthält keine Namen, Klassenlisten oder Einzelkonten.</li>
+    </ul>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+const D = {"n_books": 1552, "n_users": 75, "n_rents": 3156, "n_rets": 3178, "n_exts": 206, "first_audit": "17.12.2023", "last_audit": "13.10.2026", "last_rent": "02.10.2026", "first_rent": "22.12.2023", "monthly": [{"m": "2023-12", "rent": 4, "ret": 8}, {"m": "2024-01", "rent": 83, "ret": 82}, {"m": "2024-02", "rent": 153, "ret": 152}, {"m": "2024-03", "rent": 90, "ret": 101}, {"m": "2024-04", "rent": 45, "ret": 41}, {"m": "2024-05", "rent": 124, "ret": 113}, {"m": "2024-06", "rent": 80, "ret": 104}, {"m": "2024-07", "rent": 47, "ret": 55}, {"m": "2024-08", "rent": 24, "ret": 17}, {"m": "2024-09", "rent": 170, "ret": 160}, {"m": "2024-10", "rent": 31, "ret": 31}, {"m": "2024-11", "rent": 194, "ret": 181}, {"m": "2024-12", "rent": 93, "ret": 103}, {"m": "2025-01", "rent": 86, "ret": 83}, {"m": "2025-02", "rent": 205, "ret": 199}, {"m": "2025-03", "rent": 177, "ret": 188}, {"m": "2025-04", "rent": 66, "ret": 67}, {"m": "2025-05", "rent": 148, "ret": 153}, {"m": "2025-06", "rent": 75, "ret": 93}, {"m": "2025-07", "rent": 9, "ret": 16}, {"m": "2025-08", "rent": 42, "ret": 37}, {"m": "2025-09", "rent": 138, "ret": 130}, {"m": "2025-10", "rent": 80, "ret": 76}, {"m": "2025-11", "rent": 87, "ret": 97}, {"m": "2025-12", "rent": 83, "ret": 82}, {"m": "2026-01", "rent": 79, "ret": 82}, {"m": "2026-02", "rent": 126, "ret": 102}, {"m": "2026-03", "rent": 66, "ret": 82}, {"m": "2026-04", "rent": 99, "ret": 93}, {"m": "2026-05", "rent": 117, "ret": 118}, {"m": "2026-06", "rent": 71, "ret": 98}, {"m": "2026-07", "rent": 0, "ret": 0}, {"m": "2026-08", "rent": 123, "ret": 91}, {"m": "2026-09", "rent": 105, "ret": 105}, {"m": "2026-10", "rent": 36, "ret": 38}], "sj": [{"label": "2023/24", "n": 626}, {"label": "2024/25", "n": 1278}, {"label": "2025/26", "n": 988}, {"label": "2026/27", "n": 264}], "start": {"2024": 225, "2025": 180, "2026": 264}, "heat": [{"label": "2023/24", "cells": [null, null, null, null, 4, 83, 153, 90, 45, 124, 80, 47]}, {"label": "2024/25", "cells": [24, 170, 31, 194, 93, 86, 205, 177, 66, 148, 75, 9]}, {"label": "2025/26", "cells": [42, 138, 80, 87, 83, 79, 126, 66, 99, 117, 71, 0]}, {"label": "2026/27", "cells": [123, 105, 36, null, null, null, null, null, null, null, null, null]}], "hours": [{"h": 8, "n": 113}, {"h": 9, "n": 1043}, {"h": 10, "n": 1415}, {"h": 11, "n": 391}, {"h": 12, "n": 168}, {"h": 13, "n": 26}], "rent_weekdays": {"4": 3156}, "ret_weekdays": {"2": 1, "4": 3173, "5": 4}, "rent_days": 88, "per_day": 35.9, "top_days": [{"d": "28.08.2026", "n": 63}, {"d": "28.02.2025", "n": 59}, {"d": "14.02.2025", "n": 58}, {"d": "17.04.2026", "n": 58}, {"d": "08.11.2024", "n": 56}], "share_9_11": 77.9, "n_loans": 3064, "unmatched_returns": 114, "median_days": 14.0, "dur": [{"label": "bis 1 Tag", "n": 102}, {"label": "1–7 Tage", "n": 733}, {"label": "1–2 Wochen", "n": 605}, {"label": "2–3 Wochen", "n": 380}, {"label": "3–4 Wochen", "n": 283}, {"label": "4–6 Wochen", "n": 377}, {"label": "6–8 Wochen", "n": 225}, {"label": "über 8 Wochen", "n": 359}], "share_over_28": 31.4, "share_within_21": 59.4, "ext_books": 121, "ext_first": "17.04.2026", "rents_2026": 822, "cur": 92, "overdue": 45, "od_buckets": [{"label": "noch in der Frist", "n": 47}, {"label": "1–7 Tage überfällig", "n": 21}, {"label": "8–14 Tage", "n": 21}, {"label": "15–21 Tage", "n": 2}, {"label": "über 3 Wochen", "n": 1}], "cur_over100": 3, "cur_since": "19.06.2026", "status": {"available": 1444, "rented": 92, "lost": 15, "broken": 1}, "never": 688, "never_pct": 44, "idle12": 1056, "idle12_pct": 68, "per_medium": 2.03, "cohorts": [{"label": "Erstbestand 2023", "n": 1333, "ever": 707, "ever_pct": 53, "rents": 2568, "per": 1.93}, {"label": "Zugänge 2024", "n": 87, "ever": 69, "ever_pct": 79, "rents": 344, "per": 3.95}, {"label": "Zugänge 2025", "n": 69, "ever": 56, "ever_pct": 81, "rents": 147, "per": 2.13}, {"label": "Zugänge 2026", "n": 63, "ever": 32, "ever_pct": 51, "rents": 61, "per": 0.97}], "top_titles": [{"t": "Dog Man, Bd. 2: Von der Leine gelassen", "a": "Pilkey, Dav", "n": 24, "copies": 1}, {"t": "Das Dorf, Bd. 3: Gefangen im Dschungel", "a": "Olsberg, Karl", "n": 21, "copies": 1}, {"t": "Minecraft. Handbuch für Kreative", "a": "Jelley, Craig", "n": 20, "copies": 1}, {"t": "Gregs Tagebuch, Bd. 12: Und Tschüss!", "a": "Kinney, Jeff", "n": 20, "copies": 1}, {"t": "Wissen in 3D. Erfindungen", "a": "Winnewisser, Sylvia", "n": 19, "copies": 1}, {"t": "Wissen in 3D. Tiere des Meeres", "a": "Siegmann, Götz", "n": 19, "copies": 1}, {"t": "Wissen in 3D. Safari", "a": "Sommerfeld, Esther", "n": 19, "copies": 1}, {"t": "Gregs Tagebuch, Bd. 11: Alles Käse", "a": "Kinney, Jeff", "n": 19, "copies": 1}, {"t": "Minecraft. Handbuch für Farmer", "a": "Wiltshire, Alex", "n": 19, "copies": 1}, {"t": "Minecraft. Das Einsteiger-Handbuch", "a": "Verschiedene", "n": 19, "copies": 1}, {"t": "Pokémon. Das große Lexikon", "a": "Verschiedene", "n": 19, "copies": 1}, {"t": "Das Dorf, Bd. 2: Gefahr im Nether", "a": "Olsberg, Karl", "n": 18, "copies": 1}, {"t": "Minecraft. Annual 2018", "a": "Verschiedene", "n": 18, "copies": 1}, {"t": "Minecraft. Handbuch für Entdecker", "a": "Milton, Stephanie", "n": 18, "copies": 1}, {"t": "Gregs Tagebuch, Bd. 15: Halt mal die Luft an!", "a": "Kinney, Jeff", "n": 18, "copies": 1}], "top10_single_copy": 10, "top_series": [{"t": "Gregs Tagebuch", "n": 209, "titles": 20}, {"t": "Minecraft", "n": 202, "titles": 18}, {"t": "Was ist was", "n": 107, "titles": 24}, {"t": "Das Dorf", "n": 91, "titles": 7}, {"t": "Mein Lotta-Leben", "n": 88, "titles": 17}, {"t": "Wissen in 3D", "n": 80, "titles": 5}, {"t": "Das magische Baumhaus", "n": 77, "titles": 57}, {"t": "Die drei ??? Kids", "n": 66, "titles": 26}, {"t": "Beast Quest", "n": 62, "titles": 40}, {"t": "Sehen. Staunen. Wissen", "n": 59, "titles": 15}, {"t": "Star Wars", "n": 57, "titles": 10}, {"t": "Lego Ninjago", "n": 56, "titles": 8}], "top_authors": [{"t": "Kinney, Jeff", "n": 209, "titles": 20}, {"t": "Pantermüller, Alice", "n": 96, "titles": 18}, {"t": "Osborne, Mary Pope", "n": 94, "titles": 56}, {"t": "Olsberg, Karl", "n": 91, "titles": 7}, {"t": "Blade, Adam", "n": 62, "titles": 40}, {"t": "Milton, Stephanie", "n": 56, "titles": 4}, {"t": "Auer, Margit", "n": 53, "titles": 13}, {"t": "Delafosse, Claude", "n": 50, "titles": 9}, {"t": "Mugford, Simon", "n": 50, "titles": 6}, {"t": "Pilkey, Dav", "n": 47, "titles": 5}], "topics_per": [{"t": "Computerspiel", "n": 343, "stock": 29, "per": 11.8}, {"t": "Minecraft", "n": 242, "stock": 23, "per": 10.5}, {"t": "Rekorde", "n": 98, "stock": 15, "per": 6.5}, {"t": "Comic", "n": 785, "stock": 133, "per": 5.9}, {"t": "Tagebuch", "n": 276, "stock": 48, "per": 5.8}, {"t": "Dschungel", "n": 84, "stock": 16, "per": 5.2}, {"t": "Lego", "n": 76, "stock": 15, "per": 5.1}, {"t": "Lexikon", "n": 69, "stock": 15, "per": 4.6}, {"t": "Film", "n": 113, "stock": 29, "per": 3.9}, {"t": "Quiz", "n": 80, "stock": 22, "per": 3.6}, {"t": "Tiere", "n": 229, "stock": 80, "per": 2.9}, {"t": "Afrika", "n": 51, "stock": 18, "per": 2.8}], "topics_total": [{"t": "Comic", "n": 785, "stock": 133, "per": 5.9}, {"t": "Computerspiel", "n": 343, "stock": 29, "per": 11.8}, {"t": "Tagebuch", "n": 276, "stock": 48, "per": 5.8}, {"t": "Minecraft", "n": 242, "stock": 23, "per": 10.5}, {"t": "Tiere", "n": 229, "stock": 80, "per": 2.9}, {"t": "Magie", "n": 175, "stock": 72, "per": 2.4}, {"t": "Schule", "n": 148, "stock": 69, "per": 2.1}, {"t": "Zeitreise", "n": 122, "stock": 78, "per": 1.6}, {"t": "Pferde", "n": 115, "stock": 52, "per": 2.2}, {"t": "Film", "n": 113, "stock": 29, "per": 3.9}, {"t": "Detektiv", "n": 109, "stock": 62, "per": 1.8}, {"t": "Freundinnen", "n": 107, "stock": 45, "per": 2.4}], "age": [{"t": "ab 9", "stock": 49, "n": 225, "per": 4.6}, {"t": "ab 1./2. Klasse", "stock": 15, "n": 45, "per": 3.0}, {"t": "ab 4. Klasse", "stock": 352, "n": 975, "per": 2.8}, {"t": "ab 3. Klasse", "stock": 289, "n": 692, "per": 2.4}, {"t": "ab 10", "stock": 98, "n": 180, "per": 1.8}, {"t": "ab 2. Klasse", "stock": 172, "n": 302, "per": 1.8}, {"t": "ab 8", "stock": 220, "n": 318, "per": 1.4}, {"t": "ab 7", "stock": 70, "n": 83, "per": 1.2}, {"t": "ab 1. Klasse", "stock": 89, "n": 104, "per": 1.2}, {"t": "ab 7/8", "stock": 36, "n": 30, "per": 0.8}, {"t": "ab 6", "stock": 53, "n": 44, "per": 0.8}, {"t": "ab 5", "stock": 16, "n": 2, "per": 0.1}], "readers_total": 133, "readers_in_system": 73, "top10_share": 27.5, "median_per_reader": 20, "reader_hist": [{"label": "1–5", "n": 35}, {"label": "6–10", "n": 19}, {"label": "11–20", "n": 13}, {"label": "21–30", "n": 20}, {"label": "31–50", "n": 30}, {"label": "über 50", "n": 16}], "grades": [{"g": "1", "n": 19, "avg": 4.2, "total": 80}, {"g": "2", "n": 9, "avg": 23.7, "total": 213}, {"g": "3", "n": 19, "avg": 15.8, "total": 301}, {"g": "4", "n": 26, "avg": 13.3, "total": 347}], "grade0_accounts": 2, "users_zero12": 3, "events": {"Update book": 3323, "Return book": 3178, "Rent book": 3156, "Add book": 224, "Delete book": 210, "Extend book": 206, "Add user": 153, "Update user": 84, "Delete user": 7}, "adds": {"2024": 92, "2025": 69, "2026": 63}, "dels": {"2024": 104, "2025": 34, "2026": 72}, "upd": {"2024": 1508, "2025": 1133, "2026": 658}, "lost": 15, "lost_top": [{"t": "Gregs Tagebuch, Bd. 2: Gibt's Probleme?", "n": 8}, {"t": "Walt Disney. Entenhausen-Edition. Bd. 6: Donald", "n": 4}, {"t": "Minecraft: Geniale Mini-Projekte (Bd. 2)", "n": 4}, {"t": "Der kleine Drache Kokosnuss kommt in die Schule (Bd. 1)", "n": 3}, {"t": "Das magische Baumhaus junior. Bd. 25: Bedrohung im Paradies", "n": 2}], "lost_pct": 1.0, "no_shelf": 1552, "no_isbn": 83, "no_topics": 24, "no_age": 56, "rents_deleted_books": 36, "gaps": [{"series": "Gregs Tagebuch", "have": [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], "max": 20, "missing": [2]}, {"series": "Das Dorf", "have": [1, 2, 3, 4, 5, 6, 8], "max": 8, "missing": [7]}, {"series": "Mein Lotta-Leben", "have": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 14, 15, 17, 18, 21], "max": 21, "missing": [12, 13, 16, 19, 20]}, {"series": "Die drei ??? Kids", "have": [1, 2, 3, 4, 5, 6, 7, 8, 14, 18, 22, 26, 30, 31, 40, 44], "max": 44, "missing": [9, 10, 11, 12, 13, 15, 16, 17, 19, 20, 21, 23, 24, 25, 27, 28, 29, 32, 33, 34, 35, 36, 37, 38, 39, 41, 42, 43]}], "grades_sj": [{"g": "1", "n": 19, "avg": 4.2, "total": 80, "zero": 0}, {"g": "2", "n": 9, "avg": 4.2, "total": 38, "zero": 1}, {"g": "3", "n": 19, "avg": 4.1, "total": 77, "zero": 0}, {"g": "4", "n": 26, "avg": 2.7, "total": 69, "zero": 5}], "ret_fri_pct": 99.8, "sj_start_readers": 67};
+const $=(s,r=document)=>r.querySelector(s);
+const nf=new Intl.NumberFormat('de-DE');
+const f0=n=>nf.format(n);
+const f1=n=>n.toLocaleString('de-DE',{minimumFractionDigits:1,maximumFractionDigits:1});
+const MON=['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+const MONF=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+function h(tag,attrs,...kids){const e=document.createElement(tag);for(const k in (attrs||{})){if(k==='class')e.className=attrs[k];else if(k==='style')e.style.cssText=attrs[k];else e.setAttribute(k,attrs[k]);}kids.flat().forEach(c=>{if(c==null)return;e.append(c.nodeType?c:document.createTextNode(String(c)));});return e;}
+const NS='http://www.w3.org/2000/svg';
+function s(tag,attrs,...kids){const e=document.createElementNS(NS,tag);for(const k in (attrs||{}))e.setAttribute(k,attrs[k]);kids.forEach(c=>{if(c==null)return;e.append(c.nodeType?c:document.createTextNode(String(c)));});return e;}
+
+const tip=$('#tip');
+function showTip(ev,title,rows){
+  tip.textContent='';
+  tip.append(h('div',{class:'tt'},title));
+  rows.forEach(r=>tip.append(h('div',{class:'tr'},r.key?h('i',{class:'tk',style:'background:'+r.key}):null,h('b',null,r.v),h('span',null,r.k))));
+  tip.hidden=false; moveTip(ev);
+}
+function moveTip(ev){
+  const pad=14,w=tip.offsetWidth,hh=tip.offsetHeight;
+  let x=ev.clientX+pad,y=ev.clientY+pad;
+  if(x+w>innerWidth-8)x=ev.clientX-w-pad;
+  if(y+hh>innerHeight-8)y=ev.clientY-hh-pad;
+  tip.style.transform='translate('+Math.max(8,x)+'px,'+Math.max(8,y)+'px)';
+}
+function hideTip(){tip.hidden=true}
+function bindTip(node,title,rows){
+  node.addEventListener('pointermove',e=>showTip(e,title,rows));
+  node.addEventListener('pointerleave',hideTip);
+  node.addEventListener('focus',()=>{const r=node.getBoundingClientRect();showTip({clientX:r.left+r.width/2,clientY:r.top},title,rows)});
+  node.addEventListener('blur',hideTip);
+}
+
+/* waagerechte Balkenliste */
+function barList(host,items,o){
+  o=o||{};host.textContent='';
+  const max=Math.max(...items.map(i=>i.v));
+  items.forEach((it,idx)=>{
+    const row=h('div',{class:'brow',tabindex:'0'},
+      h('div',{class:'bl'},o.rank===false?null:h('span',{class:'rk'},String(idx+1)),h('span',{class:'bt'},it.t),it.sub?h('span',{class:'bs'},it.sub):null),
+      h('div',{class:'bv'},(o.fmt||f0)(it.v),o.unit?h('small',null,o.unit):null),
+      h('div',{class:'bar'},h('i',{style:'width:'+Math.max(1.5,it.v/(o.max||max)*100)+'%'+(it.color?';background:'+it.color:'')})));
+    if(it.tip)bindTip(row,it.t,it.tip);
+    host.append(row);
+  });
+}
+/* senkrechte Säulen */
+function colChart(host,items,o){
+  o=o||{};host.textContent='';
+  const H=o.h||150,max=Math.max(...items.map(i=>i.v));
+  const wrap=h('div',{class:'cols'});
+  items.forEach(it=>{
+    const col=h('div',{class:'col',tabindex:'0'},
+      h('div',{class:'v'},(o.fmt||f0)(it.v)),
+      h('div',{class:'b',style:'height:'+Math.max(2,it.v/max*H)+'px'+(it.color?';background:'+it.color:'')}),
+      h('div',{class:'base'}),
+      h('div',{class:'l'},it.l));
+    if(it.tip)bindTip(col,it.tt||it.l,it.tip);
+    wrap.append(col);
+  });
+  host.append(wrap);
+}
+
+/* Liniendiagramm */
+const LC=$('#lineChart');
+let cur=-1;
+function drawLine(){
+  LC.textContent='';
+  const data=D.monthly,n=data.length;
+  const W=Math.max(280,LC.clientWidth),H=W<520?250:320,m={t:34,r:18,b:30,l:38};
+  const maxV=Math.max(...data.map(d=>Math.max(d.rent,d.ret)));
+  const yMax=Math.ceil(maxV/50)*50;
+  const x=i=>m.l+(W-m.l-m.r)*i/(n-1), y=v=>H-m.b-(H-m.t-m.b)*v/yMax;
+  const svg=s('svg',{width:W,height:H,viewBox:'0 0 '+W+' '+H,role:'img','aria-hidden':'true'});
+  for(let v=0;v<=yMax;v+=50){
+    svg.append(s('line',{x1:m.l,x2:W-m.r,y1:y(v),y2:y(v),class:v===0?'bl0':'gl'}));
+    svg.append(s('text',{x:m.l-8,y:y(v)+4,'text-anchor':'end'},String(v)));
+  }
+  data.forEach((d,i)=>{
+    const mo=+d.m.slice(5);
+    if(mo===8||i===0){
+      const yr=+d.m.slice(0,4);
+      const lab=i===0?'ab Dez. 2023':'SJ '+(W<520?String(yr).slice(2):yr)+'/'+String(yr+1).slice(2);
+      if(mo===8)svg.append(s('line',{x1:x(i),x2:x(i),y1:m.t-8,y2:H-m.b,class:'sy'}));
+      if(!(i===0&&W<520)){const tx=x(i)+(i===0?0:5),w=lab.length*7.2,flip=tx+w>W;svg.append(s('text',{x:flip?x(i)-5:tx,y:m.t-14,class:'sylab','text-anchor':flip?'end':'start'},lab));}
+    }
+    const step=W<520?6:3;
+    if((mo-1)%step===0){
+      svg.append(s('text',{x:x(i),y:H-8,'text-anchor':'middle'},MON[mo-1]+(mo===1?' '+d.m.slice(2,4):'')));
+    }
+  });
+  const path=k=>data.map((d,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(d[k]).toFixed(1)).join(' ');
+  svg.append(s('path',{d:path('rent')+' L'+x(n-1)+' '+y(0)+' L'+x(0)+' '+y(0)+'Z',class:'area'}));
+  svg.append(s('path',{d:path('ret'),class:'ln t'}));
+  svg.append(s('path',{d:path('rent'),class:'ln r'}));
+  [['ret','t'],['rent','r']].forEach(([k,c])=>svg.append(s('circle',{cx:x(n-1),cy:y(data[n-1][k]),r:4.5,class:'dot '+c})));
+  let pk=0;data.forEach((d,i)=>{if(d.rent>data[pk].rent)pk=i});
+  svg.append(s('circle',{cx:x(pk),cy:y(data[pk].rent),r:4.5,class:'dot r'}));
+  svg.append(s('text',{x:Math.min(Math.max(x(pk),44),W-m.r-30),y:y(data[pk].rent)-12,'text-anchor':'middle',class:'ann'},MON[+data[pk].m.slice(5)-1]+' '+data[pk].m.slice(2,4)+': '+data[pk].rent));
+  const cross=s('line',{y1:m.t-8,y2:H-m.b,class:'cross',visibility:'hidden'});
+  const d1=s('circle',{r:5,class:'dot r',visibility:'hidden'}),d2=s('circle',{r:5,class:'dot t',visibility:'hidden'});
+  svg.append(cross,d2,d1);
+  const hit=s('rect',{x:m.l,y:0,width:W-m.l-m.r,height:H,fill:'transparent'});
+  svg.append(hit);
+  function at(i,ev){
+    i=Math.max(0,Math.min(n-1,i));cur=i;const d=data[i];
+    cross.setAttribute('x1',x(i));cross.setAttribute('x2',x(i));cross.setAttribute('visibility','visible');
+    d1.setAttribute('cx',x(i));d1.setAttribute('cy',y(d.rent));d1.setAttribute('visibility','visible');
+    d2.setAttribute('cx',x(i));d2.setAttribute('cy',y(d.ret));d2.setAttribute('visibility','visible');
+    const mo=+d.m.slice(5)-1;
+    showTip(ev,MONF[mo]+' '+d.m.slice(0,4),[{key:'var(--acc)',v:f0(d.rent),k:'Ausleihen'},{key:'var(--warm)',v:f0(d.ret),k:'Rückgaben'}]);
+  }
+  function off(){cross.setAttribute('visibility','hidden');d1.setAttribute('visibility','hidden');d2.setAttribute('visibility','hidden');hideTip();}
+  hit.addEventListener('pointermove',e=>{const r=svg.getBoundingClientRect();at(Math.round((e.clientX-r.left-m.l)/(W-m.l-m.r)*(n-1)),e)});
+  hit.addEventListener('pointerleave',off);
+  LC.onkeydown=e=>{
+    if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+    e.preventDefault();const r=svg.getBoundingClientRect();
+    const i=cur<0?n-1:cur+(e.key==='ArrowRight'?1:-1);
+    const ii=Math.max(0,Math.min(n-1,i));
+    at(ii,{clientX:r.left+x(ii),clientY:r.top+y(data[ii].rent)});
+  };
+  LC.onblur=off;
+  LC.append(svg);
+}
+drawLine();
+let rz;new ResizeObserver(()=>{clearTimeout(rz);rz=setTimeout(drawLine,80)}).observe(LC);
+
+/* Tabelle zum Diagramm */
+(function(){
+  const t=$('#monthTable');
+  t.append(h('thead',null,h('tr',null,h('th',null,'Monat'),h('th',null,'Ausleihen'),h('th',null,'Rückgaben'))));
+  const tb=h('tbody');
+  D.monthly.forEach(d=>tb.append(h('tr',null,h('td',null,MONF[+d.m.slice(5)-1]+' '+d.m.slice(0,4)),h('td',null,f0(d.rent)),h('td',null,f0(d.ret)))));
+  t.append(tb);
+})();
+
+/* Schuljahre */
+barList($('#sjBars'),D.sj.map((x,i)=>({t:'Schuljahr '+x.label,sub:i===0?'ab Dezember 2023':i===3?'bis 15. Oktober 2026':'',v:x.n,tip:[{k:'Ausleihen',v:f0(x.n)}]})),{rank:false,unit:'Ausleihen'});
+barList($('#startBars'),Object.keys(D.start).map(y=>({t:y,sub:'1. August bis 15. Oktober',v:D.start[y],tip:[{k:'Ausleihen',v:f0(D.start[y])}]})),{rank:false,unit:'Ausleihen'});
+
+/* Heatmap */
+(function(){
+  const host=$('#heat'),order=['Aug','Sep','Okt','Nov','Dez','Jan','Feb','Mär','Apr','Mai','Jun','Jul'];
+  const mx=Math.max(...D.heat.flatMap(r=>r.cells.filter(v=>v!=null)));
+  host.append(h('div'));order.forEach(o=>host.append(h('div',{class:'hh'},o)));
+  D.heat.forEach(r=>{
+    host.append(h('div',{class:'hr'},r.label));
+    r.cells.forEach((v,i)=>{
+      if(v==null){host.append(h('div',{class:'hc na','aria-label':'keine Daten'},'–'));return;}
+      const pct=6+54*(v/mx);
+      const c=h('div',{class:'hc'+(v===mx?' pk':''),tabindex:'0',style:'background:color-mix(in srgb,var(--acc) '+pct.toFixed(1)+'%,var(--card))'},String(v));
+      bindTip(c,order[i]+' · Schuljahr '+r.label,[{k:'Ausleihen',v:f0(v)}]);
+      host.append(c);
+    });
+  });
+})();
+
+/* Rhythmus */
+barList($('#hourBars'),D.hours.map(x=>({t:x.h+' bis '+(x.h+1)+' Uhr',v:x.n,tip:[{k:'Ausleihen',v:f0(x.n)}]})),{rank:false});
+barList($('#dayBars'),D.top_days.map(x=>({t:'Freitag, '+x.d,v:x.n,tip:[{k:'Ausleihen',v:f0(x.n)}]})),{unit:'Ausleihen'});
+
+/* Medien-Tabs */
+const perTip=x=>[{k:'Ausleihen pro Medium',v:f1(x.per)},{k:'Ausleihen gesamt',v:f0(x.n)},{k:'Medien',v:f0(x.stock)}];
+const TABS=[
+ {id:'titel',label:'Meistausgeliehene Titel',cap:'Die 15 Titel mit den meisten Ausleihen seit Dezember 2023.',unit:'Ausleihen',
+  items:D.top_titles.map(x=>({t:x.t,sub:x.a+' · '+(x.copies>1?x.copies+' Exemplare':'1 Exemplar'),v:x.n,tip:[{k:'Ausleihen',v:f0(x.n)},{k:'Exemplare',v:String(x.copies)}]}))},
+ {id:'reihen',label:'Reihen',cap:'Ausleihen aller Bände einer Reihe zusammen. Reihen werden aus dem Titelanfang erkannt.',unit:'Ausleihen',
+  items:D.top_series.map(x=>({t:x.t,sub:x.titles+' Titel im Bestand',v:x.n,tip:[{k:'Ausleihen',v:f0(x.n)},{k:'Titel im Bestand',v:String(x.titles)}]}))},
+ {id:'autoren',label:'Autorinnen und Autoren',cap:'Ausleihen aller Titel einer Person, ohne „Verschiedene“ und „Unbekannt“.',unit:'Ausleihen',
+  items:D.top_authors.map(x=>({t:x.t,sub:x.titles+' Titel im Bestand',v:x.n,tip:[{k:'Ausleihen',v:f0(x.n)},{k:'Titel im Bestand',v:String(x.titles)}]}))},
+ {id:'themen',label:'Themen pro Medium',cap:'Ausleihen je Medium, Themen mit mindestens 15 Medien. So zeigt sich, wo die Nachfrage im Verhältnis zum Angebot am größten ist.',unit:'pro Medium',fmt:f1,
+  items:D.topics_per.map(x=>({t:x.t,sub:f0(x.n)+' Ausleihen · '+x.stock+' Medien',v:x.per,tip:perTip(x)}))},
+ {id:'alter',label:'Altersangabe',cap:'Ausleihen je Medium nach empfohlener Altersstufe, Gruppen mit mindestens 15 Medien. „ab 8“ meint Jahre, „ab 4. Klasse“ die Klassenstufe.',unit:'pro Medium',fmt:f1,
+  items:D.age.map(x=>({t:x.t,sub:f0(x.n)+' Ausleihen · '+x.stock+' Medien',v:x.per,tip:perTip(x)}))}
+];
+(function(){
+  const tabs=$('#medTabs'),cap=$('#medCap'),list=$('#medList');
+  function sel(id){
+    const T=TABS.find(t=>t.id===id);
+    [...tabs.children].forEach(b=>b.setAttribute('aria-selected',String(b.dataset.id===id)));
+    cap.textContent=T.cap;
+    barList(list,T.items,{unit:T.unit,fmt:T.fmt});
+  }
+  TABS.forEach(t=>{const b=h('button',{class:'tab',role:'tab','data-id':t.id,type:'button'},t.label);b.addEventListener('click',()=>sel(t.id));tabs.append(b)});
+  sel('titel');
+})();
+
+/* Lücken */
+(function(){
+  const host=$('#gaps');
+  D.gaps.filter(g=>g.series!=='Die drei ??? Kids').forEach(g=>{
+    const miss=new Set(g.missing),box=h('div',{class:'vols'});
+    for(let i=1;i<=g.max;i++)box.append(h('i',{class:miss.has(i)?'m':''},String(i)));
+    host.append(h('div',{class:'gap'},h('h4',null,g.series,' ',h('span',null,'· fehlt: Bd. '+g.missing.join(', '))),box));
+  });
+})();
+
+/* Nachfrage je Titel in Reihen */
+barList($('#perTitle'),D.top_series.filter(x=>x.titles>=4).map(x=>({t:x.t,sub:x.titles+' Titel · '+f0(x.n)+' Ausleihen',v:x.n/x.titles,tip:[{k:'Ausleihen je Titel',v:f1(x.n/x.titles)},{k:'Titel',v:String(x.titles)},{k:'Ausleihen gesamt',v:f0(x.n)}]})).sort((a,b)=>b.v-a.v).slice(0,5),{unit:'je Titel',fmt:f1});
+
+/* Rückgabe */
+const DL=['bis 1 Tag','1–7 Tage','1–2 Wo.','2–3 Wo.','3–4 Wo.','4–6 Wo.','6–8 Wo.','> 8 Wo.'];
+colChart($('#durCols'),D.dur.map((x,i)=>({l:DL[i],tt:x.label,v:x.n,tip:[{k:'Leihen',v:f0(x.n)},{k:'Anteil',v:f1(x.n/D.n_loans*100)+' %'}]})),{h:150});
+colChart($('#curCols'),D.od_buckets.map((x,i)=>({l:x.label,v:x.n,color:i?'var(--warm)':'var(--acc)',tip:[{k:'Medien',v:f0(x.n)}]})),{h:150});
+
+/* Bestand */
+(function(){
+  const st=D.status,tot=D.n_books;
+  const defs=[['available','verfügbar','var(--acc-wash)','color-mix(in srgb,var(--acc) 38%,var(--card))'],['rented','verliehen','var(--acc)','var(--acc)'],['lost','verloren','var(--crit)','var(--crit)'],['broken','defekt','#fab219','#fab219']];
+  const bar=$('#statusBar'),leg=$('#statusLeg');
+  defs.forEach(d=>{
+    const n=st[d[0]]||0;
+    const seg=h('i',{style:'flex:'+n+' 1 0;background:'+d[3],tabindex:'0'});
+    bindTip(seg,d[1],[{k:'Medien',v:f0(n)},{k:'Anteil',v:f1(n/tot*100)+' %'}]);
+    bar.append(seg);
+    leg.append(h('div',null,h('b',null,f0(n)),h('span',{class:'sw',style:'background:'+d[3]}),d[1]+' ('+f1(n/tot*100)+' %)'));
+  });
+  barList($('#cohEver'),D.cohorts.map(c=>({t:c.label,sub:f0(c.n)+' Medien',v:c.ever_pct,tip:[{k:'schon ausgeliehen',v:f0(c.ever)+' von '+f0(c.n)}]})),{rank:false,unit:'%',max:100});
+  barList($('#cohPer'),D.cohorts.map(c=>({t:c.label,sub:f0(c.rents)+' Ausleihen',v:c.per,tip:[{k:'Ausleihen pro Medium',v:f1(c.per).replace(/,0$/,',0')}]})),{rank:false,fmt:v=>v.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2})});
+  const t=$('#lostTable');
+  D.lost_top.forEach(x=>t.append(h('tr',null,h('td',null,x.t),h('td',null,x.n+(x.n===1?' Ausleihe':' Ausleihen')))));
+})();
+
+/* Leser */
+colChart($('#gradeCols'),D.grades_sj.map(x=>({l:'Klasse '+x.g+' ('+x.n+' Konten)',v:x.avg,fmt:f1,tip:[{k:'Ø Ausleihen pro Konto',v:f1(x.avg)},{k:'Konten ohne Ausleihe',v:String(x.zero)},{k:'Ausleihen gesamt',v:f0(x.total)}]})),{h:150});
+colChart($('#readerCols'),D.reader_hist.map(x=>({l:x.label,tt:x.label+' Ausleihen',v:x.n,tip:[{k:'Konten',v:f0(x.n)}]})),{h:150});
+
+/* Ideen */
+const I=[
+ {k:'now',t:'Nachkaufliste aus der Nachfrage',p:'Titel mit den meisten Ausleihen pro Exemplar bekommen ein Zweitexemplar, zuerst die Spitzenreiter und Reihen mit durchgehend hoher Nachfrage.',r:'10 von 10',x:'Spitzentiteln gibt es nur als Einzelexemplar.'},
+ {k:'now',t:'Reihen vervollständigen',p:'Lücken in beliebten Reihen sind besonders ärgerlich. Die Liste der fehlenden Bände lässt sich direkt aus dem Bestand erzeugen.',r:'Bd. 2, 7, 12, 13 …',x:'fehlen bei Gregs Tagebuch, Das Dorf und Mein Lotta-Leben.'},
+ {k:'now',t:'Ladenhüter-Aktion',p:'Themenkisten, Vorstellung im Klassenverband oder „Blind Date mit einem Buch“ für Medien, die nie ausgeliehen wurden. Veraltetes kann aussortiert werden.',r:f0(D.never),x:'Medien wurden seit Dezember 2023 nie ausgeliehen.'},
+ {k:'now',t:'Rückgabe-Erinnerung für Klassen',p:'Eine Liste überfälliger Medien je Klasse als Zettel für die Klassenlehrkraft vor dem nächsten Ausleihtag. Die Klassenzuordnung ist in den Konten bereits vorhanden.',r:String(D.overdue),x:'überfällige Medien, drei davon seit dem 19. Juni.'},
+ {k:'now',t:'Ausleihtag und Besetzung planen',p:'Fast alles läuft in zwei Stunden. Ausleihhelfer können gezielt für diese Zeit eingeteilt werden, ein zweites Zeitfenster am späteren Vormittag könnte den Andrang entzerren.',r:f0(Math.round(D.share_9_11))+' %',x:'der Ausleihen entstehen zwischen 9 und 11 Uhr.'},
+ {k:'now',t:'Ferienausleihe anbieten',p:'In den Sommerferien liegt die Ausleihe praktisch still. Ferienpakete mit längerer Leihfrist vor den Sommerferien könnten das ändern.',r:'0',x:'Ausleihen im Juli 2026, im Juli 2025 waren es 9.'},
+ {k:'now',t:'Ältere Kinder gezielt ansprechen',p:'In Klasse 4 haben seit August einige Konten noch nichts ausgeliehen. Medien ab 4. Klasse und ab 9 Jahren laufen im Verhältnis zum Bestand am besten.',r:'5 von 26',x:'Konten der Klasse 4 ohne Ausleihe seit 1. August.'},
+ {k:'now',t:'Neuerwerbungen sichtbar machen',p:'Neue Medien laufen gut, solange sie auffallen. Ein Neuheiten-Regal und kurze Vorstellungen im Unterricht holen auch die jüngsten Zugänge schneller in Umlauf.',r:'79 % gegenüber 51 %',x:'der Zugänge 2024 bzw. 2026 wurden schon ausgeliehen.'},
+ {k:'now',t:'Leseratten feiern, stille Leser abholen',p:'Urkunden für besonders aktive Konten, gezielte Empfehlungen für Konten mit wenigen Ausleihen. Die Auswertung kann anonym auf Klassenebene bleiben.',r:'16 und 35',x:'Konten mit über 50 bzw. höchstens 5 Ausleihen seit Dezember 2023.'},
+ {k:'now',t:'Leihfrist überprüfen',p:'Die meisten Medien kommen früher zurück als die übliche Frist, ein knappes Drittel bleibt länger als vier Wochen. Das zeigt, ob eine kürzere Standardfrist und Verlängerungen besser passen.',r:f0(D.median_days)+' Tage',x:'Median der Leihdauer, aktuell sind meist 21 Tage Frist eingetragen.'},
+ {k:'now',t:'Ersatz für verlorene Medien',p:'Als verloren markierte Medien mit hoher Nachfrage stehen zuerst auf der Ersatzliste. Zusätzlich lässt sich prüfen, ob Verluste bei bestimmten Reihen häufiger sind.',r:'8 Ausleihen',x:'hatte Gregs Tagebuch Bd. 2, das gefragteste verlorene Medium.'},
+ {k:'new',t:'Regalstandorte erfassen',p:'Mit einem Standort je Medium lässt sich sehen, welche Regale gut laufen und welche Umstellung sich lohnt. Aktuell ist das Feld überall leer.',r:f0(D.no_shelf),x:'Medien ohne Regalstandort, daher keine Regalauswertung möglich.'},
+ {k:'new',t:'Vormerkungen und Wünsche sammeln',p:'Eine Wunschbox oder Vormerkliste zeigt Nachfrage, die der Bestand nicht bedienen kann. Das ist die beste Grundlage für Anschaffungen.',r:'Neu',x:'wird bisher nicht erfasst, im Protokoll fehlt die unbefriedigte Nachfrage.'},
+ {k:'new',t:'Rückmeldungen der Kinder',p:'Ein Daumen oder Stern beim Zurückgeben ergibt Empfehlungslisten wie „Beliebt in Klasse 3“ und zeigt, ob häufig geliehene Bücher auch gefallen.',r:'Neu',x:'Ausleihen zeigen Interesse, aber nicht, ob das Buch gut war.'}
+];
+(function(){
+  const grid=$('#ideaGrid'),fl=$('#ideaFilters');
+  I.forEach(i=>grid.append(h('article',{class:'idea','data-k':i.k},h('span',{class:'tag'+(i.k==='new'?' new':'')},i.k==='now'?'Sofort möglich':'Braucht neue Daten'),h('h3',null,i.t),h('p',null,i.p),h('div',{class:'teaser'},h('b',null,i.r),' ',i.x))));
+  const defs=[['all','Alle'],['now','Sofort möglich'],['new','Braucht neue Daten']];
+  function sel(k){
+    [...fl.children].forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.k===k)));
+    [...grid.children].forEach(a=>a.classList.toggle('hide',k!=='all'&&a.dataset.k!==k));
+  }
+  defs.forEach(d=>{const b=h('button',{class:'chip','data-k':d[0],type:'button','aria-pressed':'false'},d[1]+' ('+(d[0]==='all'?I.length:I.filter(i=>i.k===d[0]).length)+')');b.addEventListener('click',()=>sel(d[0]));fl.append(b)});
+  sel('all');
+})();
+})();
+</script>
+
+</body></html>
