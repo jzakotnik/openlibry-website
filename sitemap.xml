@@ -255,4 +255,13 @@
 </url>
 
 
+<url>
+  <loc>https://openlibry.de/impressum.html</loc>
+  <changefreq>yearly</changefreq>
+</url>
+<url>
+  <loc>https://openlibry.de/datenschutz.html</loc>
+  <changefreq>yearly</changefreq>
+</url>
+
 </urlset>
