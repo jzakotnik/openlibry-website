@@ -1,182 +1,90 @@
 # OpenLibry Website
 
-Eine moderne, performante und SEO-optimierte Website für das OpenLibry Schulbücherei-Projekt.
+Die Website von [openlibry.de](https://openlibry.de) – der freien Schulbücherei-Software [OpenLibry](https://github.com/jzakotnik/openlibry).
 
-## 🎯 Übersicht
+Eine statische Seite ohne Build-Schritt: reines HTML, CSS und Vanilla JavaScript. Keine Cookies, keine externen Schriftarten, CDNs oder Tracker.
 
-Diese Website wurde komplett neu gestaltet mit folgenden Zielen:
-
-- **Keine externen Abhängigkeiten**: Keine Google Fonts, CDNs oder externe Ressourcen
-- **Moderne Technologie**: Vanilla CSS mit Custom Properties, Vanilla JavaScript
-- **Performance**: Minimale Dateigröße (~20KB CSS, ~5KB JS)
-- **SEO-optimiert**: Structured Data, Meta Tags, semantisches HTML
-- **Barrierefrei**: ARIA-Labels, Keyboard-Navigation, Reduced Motion Support
-- **Responsive**: Mobile-first Design, funktioniert auf allen Geräten
-
-## 📁 Dateistruktur
+## Dateistruktur
 
 ```
 openlibry-website/
-├── index.html          # Hauptseite (alles in einer Datei)
+├── index.html           # Startseite (alles in einer Datei, inkl. JSON-LD)
+├── impressum.html       # Impressum
+├── datenschutz.html     # Datenschutzerklärung
+├── 404.html             # Fehlerseite (von nginx per error_page ausgeliefert)
+├── sample-report.html   # Beispielbericht (anonymisiert)
+├── configurator/        # .env-Generator für OpenLibry
 ├── css/
-│   └── main.css        # Alle Styles (~1000 Zeilen, gut dokumentiert)
-├── js/
-│   └── main.js         # Vanilla JavaScript (~200 Zeilen)
-├── images/             # Bilder (müssen hinzugefügt werden)
-│   ├── screenshot_hero.jpg
-│   ├── caroussel_screen_1.jpg
-│   ├── caroussel_screen_2.jpg
-│   ├── caroussel_screen_3.jpg
-│   ├── caroussel_screen_4.jpg
-│   ├── caroussel_screen_5.jpg
-│   └── og-image.jpg    # Social Media Preview (1200x630px)
-├── videos/             # Videos (aus dem Original-Projekt)
-│   ├── startscreen_video.mov
-│   ├── book_video.mov
-│   ├── user_video.mov
-│   ├── rent_video.mov
-│   └── report_video.mov
-└── README.md           # Diese Datei
+│   ├── main.css         # Haupt-Stylesheet
+│   └── contact-form.css # Kontaktformular
+├── js/main.js           # Theme-Umschalter, Menü, Animationen
+├── images/              # Screenshots, Poster, Icons
+├── videos/              # Demo-Videos (MP4, H.264/AAC)
+├── scripts/
+│   └── update-version.mjs  # schreibt die aktuelle Version in index.html
+├── .github/workflows/
+│   └── update-version.yml  # führt das Skript täglich aus
+├── robots.txt
+└── sitemap.xml
 ```
 
-## 🚀 Installation
+## Lokal ansehen
 
-1. Dateien auf einen Webserver kopieren
-2. Bilder im `images/` Ordner platzieren (siehe unten)
-3. Videos im `videos/` Ordner platzieren
-4. Fertig!
-
-Keine Build-Tools, keine Abhängigkeiten, keine Kompilierung nötig.
-
-## 🖼️ Benötigte Bilder
-
-### Hero Screenshot
-- **Datei**: `images/screenshot_hero.jpg`
-- **Größe**: 600x400px (oder größer, wird responsiv skaliert)
-- **Inhalt**: Hauptansicht der OpenLibry-Oberfläche
-
-### Karussell Screenshots
-- **Dateien**: `images/caroussel_screen_1.jpg` bis `caroussel_screen_5.jpg`
-- **Größe**: 540x338px (16:10 Verhältnis empfohlen)
-- **Inhalt**: Verschiedene Ansichten der App
-
-### Open Graph Image
-- **Datei**: `images/og-image.jpg`
-- **Größe**: 1200x630px (exakt)
-- **Inhalt**: Vorschaubild für Social Media
-
-### Video Poster (optional)
-- **Dateien**: `images/video-poster-*.jpg`
-- **Größe**: 352x198px (16:9 Verhältnis)
-- **Inhalt**: Vorschaubilder für Videos
-
-## 🎨 Anpassungen
-
-### Farben ändern
-
-Alle Farben sind als CSS Custom Properties in `css/main.css` definiert:
-
-```css
-:root {
-  --color-teal-500: #14b8a6;    /* Hauptfarbe */
-  --color-purple-500: #a855f7;  /* Akzentfarbe */
-  --color-background: #09090b;  /* Hintergrund */
-  /* ... weitere Farben */
-}
+```bash
+python3 -m http.server 8000
+# dann http://localhost:8000 öffnen
 ```
 
-### Dark/Light Mode
+Absolute Pfade (z. B. `/css/main.css` auf den Unterseiten) funktionieren nur über einen Webserver, nicht per Doppelklick auf die Datei.
 
-Die Website unterstützt beide Modi. Der Modus wird:
-1. Beim ersten Besuch nach Systemeinstellung gewählt
-2. Im localStorage gespeichert wenn manuell gewechselt
-3. Über den Toggle-Button in der Navigation umschaltbar
+## Veröffentlichen
 
-### Fonts
+Die Dateien liegen auf dem Server unter `/var/www/html/openlibry-website` und werden von nginx ausgeliefert. Die Dokumentation unter `/site/` wird getrennt gebaut und ist nicht Teil dieses Repos. Die nginx-Konfiguration enthält:
 
-Es werden System-Fonts verwendet (keine externen Fonts):
+- Weiterleitung HTTP → HTTPS und `www` → `openlibry.de`
+- `error_page 404 /404.html`
+- Caching für Bilder, Videos, CSS und JS; HTML wird immer neu validiert
+- Sperre für Dotfiles, `.php`, `scripts/` und andere Repo-Dateien
 
-```css
---font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+## Inhalte pflegen
+
+### SEO-relevante Stellen in `index.html`
+
+- `<title>`, `description`, Open-Graph-Tags und Canonical-URL im `<head>`
+- JSON-LD: `SoftwareApplication` und `FAQPage`. Die FAQ-Texte dort müssen zu dem passen, was auf der Seite steht.
+- Neue Seiten in `sitemap.xml` eintragen.
+
+### Open-Graph-Bild
+
+Es gibt noch kein Vorschaubild für geteilte Links. Ein Bild (JPG/PNG, 1200×630 px) unter `images/og-image.jpg` ablegen und im `<head>` ergänzen:
+
+```html
+<meta property="og:image" content="https://openlibry.de/images/og-image.jpg" />
 ```
 
-## 📊 SEO Features
+### Softwareversion
 
-- **Meta Tags**: Title, Description, Keywords
-- **Open Graph**: Facebook/LinkedIn Preview
-- **Twitter Cards**: Twitter Preview
-- **Schema.org**: SoftwareApplication + FAQPage
-- **Canonical URL**: Vermeidet Duplicate Content
-- **Semantisches HTML**: Header, Main, Section, Article, Footer
+`softwareVersion` im JSON-LD von `index.html` wird nicht von Hand gepflegt. Die GitHub Action `Update software version` liest täglich das neueste Release von `jzakotnik/openlibry` (ersatzweise den neuesten Tag) und committet die Änderung. Manuell starten: Actions → *Update software version* → *Run workflow*.
 
-## ♿ Barrierefreiheit
+### Bilder und Videos
 
-- ARIA-Labels für interaktive Elemente
-- Skip-Links (können hinzugefügt werden)
-- Keyboard-Navigation
-- Focus-Indikatoren
-- `prefers-reduced-motion` Support
-- Ausreichende Farbkontraste
+- Screenshots als JPG, auf etwa die doppelte Anzeigegröße verkleinern (Karussell: 1080 px Breite), Qualität um 80.
+- Videos als MP4 mit H.264 und AAC. Die Original-Videos gehören nicht ins Repo (`/videos/large` steht in der `.gitignore`).
+- Bei `<img>` immer `width`, `height` und einen beschreibenden `alt`-Text setzen. Bilder unterhalb des sichtbaren Bereichs mit `loading="lazy"`.
+- Videos mit `preload="none"` und einem `poster`-Bild einbinden.
 
-## 🔧 JavaScript Features
+### Rechtstexte
 
-- **Theme Toggle**: Dark/Light Mode Umschaltung
-- **Header Scroll**: Hintergrund bei Scroll
-- **Mobile Menu**: Hamburger-Menü für Mobile
-- **Smooth Scroll**: Sanftes Scrollen zu Ankern
-- **Scroll Animations**: IntersectionObserver für Fade-In
-- **Counter Animation**: Animierte Zahlen
-- **Lazy Loading**: Videos werden erst bei Bedarf geladen
+In `impressum.html` und `datenschutz.html` sind Felder mit gelb markierten `[…]` Platzhaltern. Diese vor der Veröffentlichung ausfüllen. Ändern sich Formulare, Newsletter oder Hosting, auch die Datenschutzerklärung anpassen.
 
-## 📱 Responsive Breakpoints
+## Farbschema
 
-```css
-/* Mobile First */
-@media (min-width: 640px) { /* sm */ }
-@media (min-width: 768px) { /* md - Navigation sichtbar */ }
-@media (min-width: 1024px) { /* lg - Volle Breite */ }
-```
+Hell und Dunkel werden über `data-theme` am `<html>`-Element umgeschaltet. Die Farben stehen als CSS-Variablen am Anfang von `css/main.css`. Die Wahl des Nutzers wird nur im `localStorage` des eigenen Browsers gespeichert.
 
-## 🗑️ Entfernte Dateien (aus dem Template)
+## Lizenz
 
-Die folgenden Dateien aus dem Original-Template werden nicht mehr benötigt:
+MIT – siehe [LICENSE](https://github.com/jzakotnik/openlibry/blob/main/LICENSE).
 
-```
-❌ css/vendors/aos.css
-❌ css/vendors/swiper-bundle.min.css
-❌ js/vendors/alpinejs.min.js
-❌ js/vendors/aos.js
-❌ js/vendors/swiper-bundle.min.js
-❌ style.css (das große 4000+ Zeilen Tailwind-File)
-```
+## Autor
 
-## 📈 Performance
-
-| Metrik | Alt (geschätzt) | Neu |
-|--------|-----------------|-----|
-| CSS | ~200KB | ~20KB |
-| JavaScript | ~100KB | ~5KB |
-| Externe Requests | 5+ | 0 |
-| LCP | >3s | <1.5s |
-
-## 🤝 Beitragen
-
-1. Fork erstellen
-2. Feature Branch: `git checkout -b feature/AmazingFeature`
-3. Commit: `git commit -m 'Add AmazingFeature'`
-4. Push: `git push origin feature/AmazingFeature`
-5. Pull Request erstellen
-
-## 📄 Lizenz
-
-MIT License - siehe [LICENSE](https://github.com/jzakotnik/openlibry/blob/main/LICENSE)
-
-## 👤 Autor
-
-**Jure Zakotnik**
-- GitHub: [@jzakotnik](https://github.com/jzakotnik)
-- Website: [openlibry.de](https://openlibry.de)
-
----
-
-Made with ❤️ for schools everywhere
+Jure Zakotnik – [@jzakotnik](https://github.com/jzakotnik)
