@@ -96,10 +96,10 @@
 .cta-box { box-shadow: 8px 8px 0 var(--ink); }
 .installation { box-shadow: var(--card-shadow); }
 .terminal { border-color: rgba(255,255,255,.18); }
-.hero-mockup::before { width: 300px; height: 300px; max-width: 90%; aspect-ratio: 1; border-radius: 50%; background: var(--accent-3); filter: none; opacity: .85; transform: translate(6%, 4%); }
-.hero-mockup img { border: 0; box-shadow: none; transform: rotate(-4deg); filter: drop-shadow(0 22px 26px rgba(31,36,51,.35));
-  -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent 100%); mask-image: linear-gradient(to bottom, #000 74%, transparent 100%); }
-.hero-mockup:hover img { transform: rotate(-2deg) translateY(-6px); }
+.hero-mockup::before { display: none; }
+.hero-mockup img { border: 0; box-shadow: none; transform: none; filter: drop-shadow(0 22px 26px rgba(31,36,51,.3));
+  -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%); mask-image: linear-gradient(to bottom, #000 78%, transparent 100%); }
+.hero-mockup:hover img { transform: none; }
 .footer { background: var(--ink); border-top: 2px solid var(--ink); }
 .footer-link, .footer-copyright { color: #e9e4d4; }
 .footer-link:hover { color: var(--accent-3); }
