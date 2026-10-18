@@ -35,7 +35,7 @@
     "Wer reitet so spät durch Nacht und Wind? Es ist der Vater mit seinem Kind.",
     "Freude, schöner Götterfunken, Tochter aus Elysium, wir betreten feuertrunken, Himmlische, dein Heiligtum."
   ];
-  var fontFam = "Georgia, serif", words = [], fontPx = 18, lineGap = 26, avoid = null;
+  var textGain = mode === "rings" ? 0.3 : 0.5, fontFam = "Georgia, serif", words = [], fontPx = 18, lineGap = 26, avoid = null;
 
   function layoutText() {
     words = [];
@@ -71,14 +71,15 @@
       var wd = words[i];
       var f = field(wd.x + wd.w / 2, wd.y);
       // linger: words fade out slowly after the wave has passed
-      wd.a = Math.max(wd.a * 0.965, Math.min(f.e, 1));
+      var target = Math.min(f.e, 1);
+      wd.a = target > wd.a ? wd.a + (target - wd.a) * 0.12 : wd.a * 0.985;
       if (wd.a < 0.03) continue;
       var k = 1;
       for (var j = 0; j < avoid.length; j++) {
         var b = avoid[j];
         if (wd.x < b.r && wd.x + wd.w > b.l && wd.y > b.t && wd.y < b.b) { k = 0.08; break; }
       }
-      ctx.fillStyle = "rgba(" + rgb + "," + (wd.a * 0.5 * k) + ")";
+      ctx.fillStyle = "rgba(" + rgb + "," + (wd.a * textGain * k) + ")";
       ctx.fillText(wd.t, wd.x, wd.y + f.w * 3);
     }
   }
@@ -187,12 +188,13 @@
   function drawRings() {
     for (var i = 0; i < ripples.length; i++) {
       var rp = ripples[i];
-      var fade = Math.max(0, 1 - rp.t / LIFE);
-      for (var k = 0; k < 4; k++) {
-        var rad = rp.t * SPEED * (1 - k * 0.13);
+      var life = Math.max(0, 1 - rp.t / LIFE);
+      var fade = Math.min(1, rp.t / 0.35) * life * life; // ease in, long soft out
+      for (var k = 0; k < 3; k++) {
+        var rad = rp.t * SPEED * 0.8 * (1 - k * 0.12);
         if (rad <= 0) continue;
-        ctx.strokeStyle = "rgba(" + rgb + "," + (rp.amp * fade * (0.5 - k * 0.1)) + ")";
-        ctx.lineWidth = 2.2 - k * 0.45;
+        ctx.strokeStyle = "rgba(" + rgb + "," + (rp.amp * fade * (0.2 - k * 0.05)) + ")";
+        ctx.lineWidth = 1.4 - k * 0.3;
         ctx.beginPath(); ctx.arc(rp.x, rp.y, rad, 0, 6.2832); ctx.stroke();
       }
     }
