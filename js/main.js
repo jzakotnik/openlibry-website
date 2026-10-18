@@ -12,6 +12,7 @@
   const mobileMenu = document.querySelector('.mobile-menu');
   const themeToggle = document.querySelector('.theme-toggle');
   const fadeElements = document.querySelectorAll('.fade-in');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   // =====================
   // Theme Management
@@ -401,7 +402,6 @@
   // Performance: Reduce motion for accessibility
   // =====================
   
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   
   if (prefersReducedMotion.matches) {
     // Disable animations
