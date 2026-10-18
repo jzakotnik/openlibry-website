@@ -1,0 +1,64 @@
+/* ============================================================
+   B · Bibliothek bei Nacht — walnut, brass lamp & leather
+   Waves: a halftone dot grid that pulses like lamplight
+   ============================================================ */
+:root, :root[data-theme="light"], :root[data-theme="dark"] {
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-ui: var(--font-body);
+  --display-weight: 600;
+
+  --color-background: #1d1713;
+  --color-surface: #261e18;
+  --color-surface-elevated: #30261e;
+  --color-text-primary: #f4e9d6;
+  --color-text-secondary: #c7b79d;
+  --color-text-muted: #988871;
+  --color-border: #41342a;
+  --header-bg: rgba(29, 23, 19, .85);
+
+  --accent: #d6a24a;          /* brass */
+  --accent-strong: #ecbb62;
+  --accent-soft: #ecbb62;
+  --accent-wash: rgba(214, 162, 74, .14);
+  --accent-2: #7fae95;        /* green banker's lamp */
+  --accent-2-wash: rgba(127, 174, 149, .16);
+  --accent-3: #c0584c;        /* oxblood leather */
+  --accent-3-ink: #e08b80;
+  --accent-3-wash: rgba(192, 88, 76, .18);
+  --on-accent: #20170e;
+
+  --r-sm: 8px; --r-md: 14px; --r-lg: 22px;
+  --card-border: 1px solid var(--color-border);
+  --card-shadow: 0 14px 30px -18px rgba(0,0,0,.7);
+  --card-shadow-hover: 0 0 0 1px rgba(214,162,74,.35), 0 22px 40px -18px rgba(214,162,74,.35);
+  --frame-border: 1px solid #5a4838;
+  --btn-shadow: 0 8px 22px -8px rgba(214, 162, 74, .55);
+  --btn-shadow-hover: 0 12px 28px -8px rgba(214, 162, 74, .7);
+  --shadow-color: rgba(0,0,0,.6);
+  --fold: #3d3025;
+  --grain: .22;
+  --grain-blend: screen;
+
+  --wave-rgb: 226, 178, 96;
+  --hero-glow:
+    radial-gradient(ellipse 45% 55% at 80% 38%, rgba(214,162,74,.30) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 8% 95%, rgba(192,88,76,.16) 0%, transparent 60%);
+
+  --section-alt: #221b16;
+  --stats-bg: #221b16;
+  --spine-1: #7d2f2a; --spine-2: #2e5a4a; --spine-3: #34507a; --spine-4: #9a6a26;
+  --install-bg: #17110d; --install-head: linear-gradient(135deg, #5a3d1d, #3b2915); --terminal-bg: #0f0a07; --terminal-accent: #ecbb62;
+  --cta-bg: linear-gradient(135deg, #3a2a1c, #2a1e14); --cta-ink: #f8ecd6; --cta-ink-soft: rgba(248,236,214,.72);
+  --cta-glow: radial-gradient(ellipse at 20% 50%, rgba(214,162,74,.25) 0%, transparent 55%);
+  --cta-btn-bg: #d6a24a; --cta-btn-ink: #20170e;
+  --newsletter-glow: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(214,162,74,.08) 0%, transparent 60%);
+  --input-bg: rgba(255,255,255,.04);
+}
+.feature-card { background: linear-gradient(180deg, #2b221b, #261e18); }
+.hero-badge { background: rgba(214,162,74,.10); border-color: rgba(214,162,74,.35); color: var(--accent-strong); }
+.text-gradient { text-decoration-color: var(--accent-3); }
+.btn-secondary { border-color: rgba(244,233,214,.55); }
+.logo-icon { filter: drop-shadow(0 0 10px rgba(214,162,74,.45)); }
+.testimonial-card { background: #261e18; }
+.screenshot-item { border-radius: var(--r-md); }

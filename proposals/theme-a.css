@@ -1,0 +1,60 @@
+/* ============================================================
+   A · Papier & Tinte  — warm cream paper, ink, burgundy & gold
+   Waves: ruled lines that swell like a rippling page
+   ============================================================ */
+:root, :root[data-theme="light"], :root[data-theme="dark"] {
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", "URW Palladio L", Georgia, serif;
+  --font-body: "Charter", "Bitstream Charter", "Iowan Old Style", Georgia, serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --display-weight: 700;
+
+  --color-background: #f6efe1;
+  --color-surface: #fbf6ec;
+  --color-surface-elevated: #fffaf0;
+  --color-text-primary: #2b2119;
+  --color-text-secondary: #5f5043;
+  --color-text-muted: #8c7b6a;
+  --color-border: #ddceb3;
+  --header-bg: rgba(246, 239, 225, .86);
+
+  --accent: #8c2f39;          /* burgundy cloth */
+  --accent-strong: #6f222b;
+  --accent-soft: #c4707a;
+  --accent-wash: rgba(140, 47, 57, .10);
+  --accent-2: #2f5d50;        /* library green */
+  --accent-2-wash: rgba(47, 93, 80, .12);
+  --accent-3: #b8893a;        /* gold leaf */
+  --accent-3-ink: #8a6420;
+  --accent-3-wash: rgba(184, 137, 58, .16);
+  --on-accent: #fff8ee;
+
+  --r-sm: 6px; --r-md: 12px; --r-lg: 18px;
+  --card-border: 1px solid var(--color-border);
+  --card-shadow: 0 1px 0 rgba(255,255,255,.7) inset, 0 10px 24px -14px rgba(70, 45, 20, .35);
+  --card-shadow-hover: 0 18px 34px -16px rgba(70, 45, 20, .45);
+  --frame-border: 6px solid #fffaf0;
+  --btn-shadow: 0 6px 16px -6px rgba(140, 47, 57, .55);
+  --btn-shadow-hover: 0 10px 22px -8px rgba(140, 47, 57, .6);
+  --shadow-color: rgba(70, 45, 20, .35);
+  --fold: #e4d4b4;
+  --grain: .5;
+
+  --wave-rgb: 111, 74, 48;
+  --hero-glow:
+    radial-gradient(ellipse 60% 55% at 78% 42%, rgba(184,137,58,.22) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 60% at 12% 85%, rgba(140,47,57,.10) 0%, transparent 60%);
+
+  --section-alt: #efe4cd;
+  --stats-bg: #efe4cd;
+  --spine-1: #8c2f39; --spine-2: #2f5d50; --spine-3: #274a6d; --spine-4: #a8742a;
+  --install-bg: #2b2119; --install-head: #3a2d22; --terminal-bg: #1a130e; --terminal-accent: #e0b15a;
+  --cta-bg: linear-gradient(135deg, #2f5d50, #234a40); --cta-ink: #fff8ee; --cta-ink-soft: rgba(255,248,238,.78);
+  --cta-glow: radial-gradient(ellipse at 85% 20%, rgba(224,177,90,.28) 0%, transparent 55%);
+  --newsletter-glow: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(184,137,58,.10) 0%, transparent 60%);
+  --input-bg: #fffaf0;
+}
+
+/* signature: drop-cap-like ornament line under hero title */
+.hero-title { text-wrap: balance; }
+.section-label::before, .section-label::after { content: "❦"; width: auto; height: auto; background: none; font-size: 1em; opacity: .7; margin: 0 .7em; }
+.hero-badge { border-style: dashed; }
