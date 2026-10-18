@@ -117,10 +117,6 @@ h1, h2, h3, h4 {
 }
 .text-gradient {
   font-style: italic;
-  text-decoration: underline wavy var(--accent-3);
-  text-decoration-thickness: 3px;
-  text-underline-offset: 10px;
-  text-decoration-skip-ink: none;
 }
 .hero-subtitle { color: var(--color-text-secondary); }
 .hero-feature svg { color: var(--accent-2); }

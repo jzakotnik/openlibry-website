@@ -50,6 +50,12 @@ for (const [key, t] of Object.entries(themes)) {
     /<script src="([^"]*)main\.js" defer><\/script>/,
     `<script src="waves.js" defer></script>\n    <script src="$1main.js" defer></script>`,
   );
+  // replace the multi-colour Docker box with a single-colour cube that matches the other card icons
+  h = h.replace(/(<div class="arch-card-icon">)\s*<svg viewBox="0 0 24 24" fill="currentColor">\s*<rect[\s\S]*?<\/svg>/,
+    '$1<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.6 19.8 7 12 11.4 4.2 7z"/><path d="M4 8.7l7 3.95v8.1L4 16.8z"/><path d="M20 8.7l-7 3.95v8.1l7-3.95z"/></svg>');
+  // the Docker heading carried a LinkedIn logo; use the cube instead
+  h = h.replace(/(<h3 class="installation-title">)\s*<svg viewBox="0 0 24 24" fill="currentColor">\s*<path[\s\S]*?<\/svg>/,
+    '$1<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.6 19.8 7 12 11.4 4.2 7z"/><path d="M4 8.7l7 3.95v8.1L4 16.8z"/><path d="M20 8.7l-7 3.95v8.1l7-3.95z"/></svg>');
   // brand gradient in logo / newsletter icon / favicon
   h = h.replace(/stop-color="#14b8a6"/g, `stop-color="${t.h1}"`).replace(/stop-color="#a855f7"/g, `stop-color="${t.h2}"`);
   h = h.replace(/%2314b8a6/g, t.c1).replace(/%23a855f7/g, t.c2);

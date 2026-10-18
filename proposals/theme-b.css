@@ -57,7 +57,6 @@
 }
 .feature-card { background: linear-gradient(180deg, #2b221b, #261e18); }
 .hero-badge { background: rgba(214,162,74,.10); border-color: rgba(214,162,74,.35); color: var(--accent-strong); }
-.text-gradient { text-decoration-color: var(--accent-3); }
 .btn-secondary { border-color: rgba(244,233,214,.55); }
 .logo-icon { filter: drop-shadow(0 0 10px rgba(214,162,74,.45)); }
 .testimonial-card { background: #261e18; }
