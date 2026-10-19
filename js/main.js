@@ -12,6 +12,7 @@
   const mobileMenu = document.querySelector('.mobile-menu');
   const themeToggle = document.querySelector('.theme-toggle');
   const fadeElements = document.querySelectorAll('.fade-in');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   // =====================
   // Theme Management
@@ -78,6 +79,8 @@
   // =====================
   
   function toggleMobileMenu() {
+    // header scrolls away on mobile, so bring it back before showing the menu
+    if (!mobileMenu.classList.contains('active')) window.scrollTo(0, 0);
     mobileMenuBtn.classList.toggle('active');
     mobileMenu.classList.toggle('active');
     document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
@@ -401,7 +404,6 @@
   // Performance: Reduce motion for accessibility
   // =====================
   
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   
   if (prefersReducedMotion.matches) {
     // Disable animations
