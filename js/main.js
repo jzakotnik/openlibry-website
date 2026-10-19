@@ -79,6 +79,8 @@
   // =====================
   
   function toggleMobileMenu() {
+    // header scrolls away on mobile, so bring it back before showing the menu
+    if (!mobileMenu.classList.contains('active')) window.scrollTo(0, 0);
     mobileMenuBtn.classList.toggle('active');
     mobileMenu.classList.toggle('active');
     document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
